@@ -45,16 +45,16 @@ offset_top = 56.0
 offset_right = 1260.0
 offset_bottom = 680.0
 
-[node name="QuestTitle" type="Label" parent="QuestDetail"]
+[node name="DetailTitle" type="Label" parent="QuestDetail"]
 text = ""
 visible = false
 
-[node name="QuestDesc" type="Label" parent="QuestDetail"]
+[node name="DetailDesc" type="Label" parent="QuestDetail"]
 text = ""
 visible = false
 autowrap_mode = 3
 
-[node name="QuestMeta" type="Label" parent="QuestDetail"]
+[node name="DetailMeta" type="Label" parent="QuestDetail"]
 text = ""
 visible = false
 
@@ -67,7 +67,7 @@ autowrap_mode = 3
 text = "接受任務！"
 visible = false
 
-[node name="StatusBar" type="Label" parent="."]
+[node name="StatusLabel" type="Label" parent="."]
 layout_mode = 1
 offset_left = 0.0
 offset_top = 690.0
