@@ -1,50 +1,44 @@
 [
   {
-    "id": "tidy_table",
-    "title": "Clear the Feast Table",
-    "description": "Help reset the family table after a meal.",
-    "xp_reward": 10,
-    "estimated_minutes": 5,
-    "family_note": "A grown-up can help decide where dishes and wipes belong."
+    "id": "chore_001",
+    "title": "整理房間",
+    "description": "把玩具收好、書本放回書架、地板清空。",
+    "difficulty": "D",
+    "age_min": 5,
+    "estimated_minutes": 15,
+    "completion_criteria": "家長確認地板淨空且物品歸位",
+    "reward_exp": 30,
+    "reward_title": "整潔見習生",
+    "encouragement": "整齊的空間讓心情變好，幹得好！",
+    "status": "available",
+    "frequency": "daily"
   },
   {
-    "id": "laundry_squire",
-    "title": "Laundry Squire Sort",
-    "description": "Sort clean socks or fold a small stack of clothes.",
-    "xp_reward": 15,
+    "id": "chore_002",
+    "title": "洗碗",
+    "description": "飯後把自己的碗盤洗乾淨並放回碗架。",
+    "difficulty": "D",
+    "age_min": 7,
     "estimated_minutes": 10,
-    "family_note": "Choose a small pile so the quest stays achievable."
+    "completion_criteria": "家長確認碗盤乾淨且歸位",
+    "reward_exp": 20,
+    "reward_title": "洗滌新手",
+    "encouragement": "謝謝你幫忙讓廚房保持乾淨！",
+    "status": "available",
+    "frequency": "daily"
   },
   {
-    "id": "pet_helper",
-    "title": "Kind Beast Companion",
-    "description": "Refresh a pet bowl with a grown-up nearby.",
-    "xp_reward": 20,
+    "id": "chore_003",
+    "title": "倒垃圾",
+    "description": "把室內垃圾桶的垃圾袋綁好，帶到門口垃圾桶。",
+    "difficulty": "C",
+    "age_min": 8,
     "estimated_minutes": 5,
-    "family_note": "Keep pet-care safety rules in the real world first."
-  },
-  {
-    "id": "book_nook_reset",
-    "title": "Book Nook Reset",
-    "description": "Return books, comics, or magazines to a cozy reading spot.",
-    "xp_reward": 10,
-    "estimated_minutes": 5,
-    "family_note": "Let the child choose one favorite book to display."
-  },
-  {
-    "id": "entryway_ranger",
-    "title": "Entryway Ranger Patrol",
-    "description": "Line up shoes, hang a coat, or clear one path near the door.",
-    "xp_reward": 15,
-    "estimated_minutes": 8,
-    "family_note": "Focus on making the next family outing smoother."
-  },
-  {
-    "id": "plant_apprentice",
-    "title": "Plant Apprentice Check",
-    "description": "Check one plant and water it only if a grown-up says it is ready.",
-    "xp_reward": 20,
-    "estimated_minutes": 5,
-    "family_note": "This quest teaches observation before action."
+    "completion_criteria": "家長確認垃圾已移到指定地點",
+    "reward_exp": 15,
+    "reward_title": "環境守護者",
+    "encouragement": "你幫整個家保持了整潔，真棒！",
+    "status": "available",
+    "frequency": "weekly"
   }
 ]
