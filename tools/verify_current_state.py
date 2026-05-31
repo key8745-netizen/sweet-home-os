@@ -16,6 +16,7 @@ REQUIRED_FILES = [
     "assets/icon.svg",
     "assets/textures/icon.svg",
     "assets/kenney/README.md",
+    "assets/kenney/import_presets.md",
     "assets/kenney/1-bit-pack/source.txt",
     "assets/kenney/1-bit-pack/decor/.gitkeep",
     "data/decorations.json",
@@ -124,6 +125,8 @@ REQUIRED_MARKERS = {
         "floor_color",
     ],
     "docs/phase-4.1-first-import-brief.md": [
+        "Manual Build Steps",
+        "Queued Evolution Moment Checklist",
         "assets/kenney/1-bit-pack/decor/guild_planter.png",
         "assets/kenney/1-bit-pack/decor/wooden_shelf.png",
         "source.example.txt",
@@ -148,10 +151,17 @@ REQUIRED_MARKERS = {
         "ui_down",
     ],
     "assets/kenney/README.md": [
+        "Manual Import Checklist",
         "guild_planter.png",
         "wooden_shelf.png",
         "res://assets/kenney/",
         "Do not commit ZIP files",
+    ],
+    "assets/kenney/import_presets.md": [
+        "Nearest",
+        "Mipmaps",
+        "Compression",
+        "divisible by 16",
     ],
     "assets/kenney/1-bit-pack/source.txt": [
         "Kenney 1-Bit Pack",
