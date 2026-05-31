@@ -11,7 +11,7 @@
   {
     "id": "cozy_rug",
     "display_name": "Cozy Rug",
-    "required_total_xp": 25,
+    "required_total_xp": 10,
     "scene_position": [330, 310],
     "color": "#8ab6d6",
     "shape": "rug",
@@ -20,7 +20,7 @@
   {
     "id": "candlestick",
     "display_name": "Candlestick",
-    "required_total_xp": 45,
+    "required_total_xp": 25,
     "scene_position": [520, 150],
     "color": "#f6d36b",
     "shape": "candle",
@@ -29,7 +29,7 @@
   {
     "id": "guild_planter",
     "display_name": "Guild Planter",
-    "required_total_xp": 70,
+    "required_total_xp": 45,
     "scene_position": [112, 330],
     "color": "#7fc78b",
     "shape": "plant",
@@ -38,10 +38,19 @@
   {
     "id": "star_lantern",
     "display_name": "Star Lantern",
-    "required_total_xp": 100,
+    "required_total_xp": 70,
     "scene_position": [650, 105],
     "color": "#f3b76d",
     "shape": "lantern",
     "sprite_path": "res://assets/kenney/1-bit-pack/decor/star_lantern.png"
+  },
+  {
+    "id": "wooden_shelf",
+    "display_name": "Wooden Shelf",
+    "required_total_xp": 100,
+    "scene_position": [400, 80],
+    "color": "#c8a96e",
+    "shape": "shelf",
+    "sprite_path": "res://assets/kenney/1-bit-pack/decor/wooden_shelf.png"
   }
 ]

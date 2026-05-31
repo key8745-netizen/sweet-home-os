@@ -1,44 +1,50 @@
 [
   {
-    "id": "chore_001",
-    "title": "整理房間",
-    "description": "把玩具收好、書本放回書架、地板清空。",
-    "difficulty": "D",
-    "age_min": 5,
-    "estimated_minutes": 15,
-    "completion_criteria": "家長確認地板淨空且物品歸位",
-    "reward_exp": 30,
-    "reward_title": "整潔見習生",
-    "encouragement": "整齊的空間讓心情變好，幹得好！",
-    "status": "available",
-    "frequency": "daily"
-  },
-  {
-    "id": "chore_002",
-    "title": "洗碗",
-    "description": "飯後把自己的碗盤洗乾淨並放回碗架。",
-    "difficulty": "D",
-    "age_min": 7,
-    "estimated_minutes": 10,
-    "completion_criteria": "家長確認碗盤乾淨且歸位",
-    "reward_exp": 20,
-    "reward_title": "洗滌新手",
-    "encouragement": "謝謝你幫忙讓廚房保持乾淨！",
-    "status": "available",
-    "frequency": "daily"
-  },
-  {
-    "id": "chore_003",
-    "title": "倒垃圾",
-    "description": "把室內垃圾桶的垃圾袋綁好，帶到門口垃圾桶。",
-    "difficulty": "C",
-    "age_min": 8,
+    "id": "tidy_table",
+    "title": "清理宴會長桌",
+    "description": "把餐後的桌面恢復成適合下一場家庭聚會的樣子。",
+    "reward_exp": 10,
     "estimated_minutes": 5,
-    "completion_criteria": "家長確認垃圾已移到指定地點",
+    "family_note": "大人可以協助確認碗盤與抹布要放回哪裡。"
+  },
+  {
+    "id": "laundry_squire",
+    "title": "洗衣侍從分類術",
+    "description": "整理乾淨襪子，或摺好一小疊衣物。",
     "reward_exp": 15,
-    "reward_title": "環境守護者",
-    "encouragement": "你幫整個家保持了整潔，真棒！",
-    "status": "available",
-    "frequency": "weekly"
+    "estimated_minutes": 10,
+    "family_note": "任務範圍保持小一點，讓孩子能穩定完成。"
+  },
+  {
+    "id": "pet_helper",
+    "title": "溫柔獸友照看",
+    "description": "在大人附近協助確認寵物水碗或食碗。",
+    "reward_exp": 20,
+    "estimated_minutes": 5,
+    "family_note": "所有寵物照護規則以現實安全為優先。"
+  },
+  {
+    "id": "book_nook_reset",
+    "title": "書角賢者整理",
+    "description": "把書、漫畫或雜誌送回溫暖的閱讀角落。",
+    "reward_exp": 10,
+    "estimated_minutes": 5,
+    "family_note": "可以讓孩子挑一本最喜歡的書展示出來。"
+  },
+  {
+    "id": "entryway_ranger",
+    "title": "玄關巡守隊",
+    "description": "排好鞋子、掛好外套，或清出門口的一條安全道路。",
+    "reward_exp": 15,
+    "estimated_minutes": 8,
+    "family_note": "把重點放在讓下一次全家出門更順利。"
+  },
+  {
+    "id": "plant_apprentice",
+    "title": "綠葉見習生觀察",
+    "description": "觀察一盆植物，只有在大人確認需要時才幫它澆水。",
+    "reward_exp": 20,
+    "estimated_minutes": 5,
+    "family_note": "這張任務卡練習先觀察、再行動。"
   }
 ]
