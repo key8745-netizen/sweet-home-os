@@ -5,13 +5,13 @@ const QUESTS_PATH := "res://data/quests.json"
 var quests: Array = []
 var selected_quest: Dictionary = {}
 
-@onready var quest_list = $QuestBoard/QuestList
-@onready var detail_title = $QuestDetail/DetailTitle
-@onready var detail_desc = $QuestDetail/DetailDesc
-@onready var detail_meta = $QuestDetail/DetailMeta
-@onready var parent_tip = $QuestDetail/ParentTip
-@onready var accept_btn = $QuestDetail/AcceptButton
-@onready var status_label = $StatusLabel
+@onready var quest_list: VBoxContainer = %QuestList
+@onready var detail_title: Label = %DetailTitle
+@onready var detail_desc: Label = %DetailDesc
+@onready var detail_meta: Label = %DetailMeta
+@onready var parent_tip: Label = %ParentTip
+@onready var accept_btn: Button = %AcceptButton
+@onready var status_label: Label = %StatusLabel
 
 
 func _ready() -> void:

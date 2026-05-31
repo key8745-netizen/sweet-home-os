@@ -36,6 +36,7 @@ offset_bottom = 680.0
 text = "📜 可接任務"
 
 [node name="QuestList" type="VBoxContainer" parent="QuestBoard"]
+unique_name_in_owner = true
 size_flags_vertical = 3
 
 [node name="QuestDetail" type="VBoxContainer" parent="."]
@@ -46,28 +47,34 @@ offset_right = 1260.0
 offset_bottom = 680.0
 
 [node name="DetailTitle" type="Label" parent="QuestDetail"]
+unique_name_in_owner = true
 text = ""
 visible = false
 
 [node name="DetailDesc" type="Label" parent="QuestDetail"]
+unique_name_in_owner = true
 text = ""
 visible = false
 autowrap_mode = 3
 
 [node name="DetailMeta" type="Label" parent="QuestDetail"]
+unique_name_in_owner = true
 text = ""
 visible = false
 
 [node name="ParentTip" type="Label" parent="QuestDetail"]
+unique_name_in_owner = true
 text = ""
 visible = false
 autowrap_mode = 3
 
 [node name="AcceptButton" type="Button" parent="QuestDetail"]
+unique_name_in_owner = true
 text = "接受任務！"
 visible = false
 
 [node name="StatusLabel" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 1
 offset_left = 0.0
 offset_top = 690.0
