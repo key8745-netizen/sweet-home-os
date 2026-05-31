@@ -1,0 +1,64 @@
+{
+  "quests": [
+    {
+      "id": "q001",
+      "title": "整理自己的房間",
+      "area": "臥室",
+      "difficulty": 1,
+      "estimated_minutes": 15,
+      "xp_reward": 30,
+      "description": "把玩具、書本放回原位，讓房間變得整潔舒適。",
+      "parent_tip": "請確認地板淨空、書桌整齊，並讓孩子自己決定擺放方式。"
+    },
+    {
+      "id": "q002",
+      "title": "洗碗任務",
+      "area": "廚房",
+      "difficulty": 2,
+      "estimated_minutes": 20,
+      "xp_reward": 45,
+      "description": "將餐後碗盤清洗乾淨，並放回碗盤架上晾乾。",
+      "parent_tip": "請確認碗盤正反面都洗淨，刀具請家長協助。"
+    },
+    {
+      "id": "q003",
+      "title": "倒垃圾",
+      "area": "全家",
+      "difficulty": 1,
+      "estimated_minutes": 10,
+      "xp_reward": 20,
+      "description": "收集各房間垃圾桶的垃圾，綁好後放到門口等待收垃圾。",
+      "parent_tip": "請確認垃圾袋綁好，回收物品分類正確。"
+    },
+    {
+      "id": "q004",
+      "title": "擦拭餐桌",
+      "area": "餐廳",
+      "difficulty": 1,
+      "estimated_minutes": 5,
+      "xp_reward": 15,
+      "description": "用濕布將餐桌擦拭乾淨，確保沒有食物殘渣。",
+      "parent_tip": "請確認桌面均勻擦拭，不遺漏角落。"
+    },
+    {
+      "id": "q005",
+      "title": "掃地任務",
+      "area": "客廳",
+      "difficulty": 2,
+      "estimated_minutes": 15,
+      "xp_reward": 35,
+      "description": "用掃把將客廳地板掃乾淨，把灰塵掃入畚箕倒掉。",
+      "parent_tip": "請確認沙發底部和角落也有掃到。"
+    },
+    {
+      "id": "q006",
+      "title": "整理書包",
+      "area": "臥室",
+      "difficulty": 1,
+      "estimated_minutes": 10,
+      "xp_reward": 25,
+      "description": "將明天需要的課本、文具整理好放入書包，確認聯絡簿已簽名。",
+      "parent_tip": "請確認課表對照正確，聯絡簿已簽名蓋章。"
+    }
+  ]
+}
