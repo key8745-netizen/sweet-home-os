@@ -1,0 +1,37 @@
+[
+  {
+    "id": "starter_banner",
+    "name": "冒險者橫幅",
+    "unlock_xp": 0,
+    "sprite_path": "assets/kenney/1-bit-pack/decor/candlestick.png",
+    "description": "公會的起點"
+  },
+  {
+    "id": "candle_stand",
+    "name": "燭台",
+    "unlock_xp": 500,
+    "sprite_path": "assets/kenney/1-bit-pack/decor/candlestick.png",
+    "description": "照亮冒險之路"
+  },
+  {
+    "id": "vine_wall",
+    "name": "爬藤牆",
+    "unlock_xp": 1500,
+    "sprite_path": "assets/kenney/1-bit-pack/decor/vines.png",
+    "description": "公會充滿生機"
+  },
+  {
+    "id": "bookshelf",
+    "name": "任務書架",
+    "unlock_xp": 3500,
+    "sprite_path": "assets/kenney/1-bit-pack/decor/bookshelf.png",
+    "description": "智慧的積累"
+  },
+  {
+    "id": "hero_rug",
+    "name": "英雄地毯",
+    "unlock_xp": 8000,
+    "sprite_path": "assets/kenney/1-bit-pack/decor/hero_rug.png",
+    "description": "傳說冒險者的榮耀"
+  }
+]

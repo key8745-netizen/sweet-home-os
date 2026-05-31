@@ -1,0 +1,23 @@
+[
+  {
+    "stage": 1,
+    "name": "見習冒險者",
+    "min_xp": 0,
+    "max_xp": 999,
+    "sprite": "assets/hero/stage1.png"
+  },
+  {
+    "stage": 2,
+    "name": "中級冒險者",
+    "min_xp": 1000,
+    "max_xp": 4999,
+    "sprite": "assets/hero/stage2.png"
+  },
+  {
+    "stage": 3,
+    "name": "傳說冒險者",
+    "min_xp": 5000,
+    "max_xp": 99999,
+    "sprite": "assets/hero/stage3.png"
+  }
+]

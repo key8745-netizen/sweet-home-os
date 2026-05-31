@@ -1,0 +1,50 @@
+[
+  {
+    "id": "sweep_floor",
+    "title": "清掃地板",
+    "description": "用掃帚把整個客廳的地板掃乾淨，讓公會大廳煥然一新！",
+    "xp_reward": 100,
+    "category": "cleaning",
+    "difficulty": 1
+  },
+  {
+    "id": "wash_dishes",
+    "title": "清洗碗盤",
+    "description": "把水槽裡所有的碗盤洗乾淨並擦乾，展現真正冒險者的細心！",
+    "xp_reward": 120,
+    "category": "kitchen",
+    "difficulty": 1
+  },
+  {
+    "id": "do_laundry",
+    "title": "洗衣服",
+    "description": "將衣服放入洗衣機，洗完後晾乾或放入烘乾機，完成全套洗衣流程！",
+    "xp_reward": 200,
+    "category": "laundry",
+    "difficulty": 2
+  },
+  {
+    "id": "water_plants",
+    "title": "澆灌植物",
+    "description": "為家中所有的植物澆水，讓它們保持生機盎然，如同公會花園一樣茂盛！",
+    "xp_reward": 80,
+    "category": "garden",
+    "difficulty": 1
+  },
+  {
+    "id": "tidy_bedroom",
+    "title": "整理臥室",
+    "description": "整理自己的臥室：鋪好床鋪、收拾玩具、整理書桌，打造完美的冒險者休息地！",
+    "xp_reward": 150,
+    "category": "cleaning",
+    "difficulty": 2
+  },
+  {
+    "id": "take_out_trash",
+    "title": "倒垃圾",
+    "description": "將家中所有垃圾桶的垃圾袋取出，綁好後帶到指定地點，完成環保任務！",
+    "xp_reward": 90,
+    "category": "chores",
+    "difficulty": 1
+  }
+]
