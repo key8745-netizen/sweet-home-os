@@ -1,0 +1,75 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1guild_hall"]
+
+[ext_resource type="Script" path="res://scripts/guild_hall.gd" id="1_ghscript"]
+[ext_resource type="PackedScene" path="res://scenes/hero_actor.tscn" id="2_heroactor"]
+
+[node name="GuildHall" type="Node2D"]
+script = ExtResource("1_ghscript")
+
+[node name="Background" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.0627451, 0.0627451, 0.180392, 1)
+
+[node name="QuestList" type="VBoxContainer" parent="."]
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 400.0
+offset_bottom = 700.0
+
+[node name="DetailPanel" type="Panel" parent="."]
+visible = false
+offset_left = 440.0
+offset_top = 60.0
+offset_right = 1260.0
+offset_bottom = 700.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DetailPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = -16.0
+offset_bottom = -16.0
+
+[node name="QuestTitle" type="Label" parent="DetailPanel/VBoxContainer"]
+text = "Quest Title"
+theme_override_font_sizes/font_size = 22
+
+[node name="QuestDesc" type="Label" parent="DetailPanel/VBoxContainer"]
+text = "Quest description goes here."
+autowrap_mode = 3
+
+[node name="XPReward" type="Label" parent="DetailPanel/VBoxContainer"]
+text = "獎勵 XP：0"
+
+[node name="AcceptButton" type="Button" parent="DetailPanel/VBoxContainer"]
+text = "接受任務"
+
+[node name="CompleteButton" type="Button" parent="DetailPanel/VBoxContainer"]
+visible = false
+text = "完成任務 ✓"
+
+[node name="XPLabel" type="Label" parent="."]
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 400.0
+offset_bottom = 50.0
+text = "XP: 0"
+theme_override_font_sizes/font_size = 20
+
+[node name="UnlockOverlay" type="Control" parent="."]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 0
+
+[node name="HeroActor" type="Node2D" parent="." instance=ExtResource("2_heroactor")]
+position = Vector2(1100, 600)

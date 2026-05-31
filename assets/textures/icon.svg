@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Sweet Home OS — placeholder icon: guild shield with a house -->
+  <rect width="128" height="128" rx="16" fill="#0F0F2E"/>
+  <!-- Shield shape -->
+  <polygon points="64,10 110,35 110,80 64,118 18,80 18,35" fill="#2A1A4E" stroke="#8B5CF6" stroke-width="4"/>
+  <!-- House silhouette -->
+  <polygon points="64,30 90,52 90,88 38,88 38,52" fill="#6D28D9"/>
+  <polygon points="64,22 96,50 32,50" fill="#8B5CF6"/>
+  <!-- Door -->
+  <rect x="55" y="68" width="18" height="20" rx="9" fill="#C4B5FD"/>
+  <!-- Star top -->
+  <polygon points="64,12 66,18 72,18 67,22 69,28 64,24 59,28 61,22 56,18 62,18"
+           fill="#FACC15"/>
+</svg>
