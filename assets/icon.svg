@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Sweet Home OS guild hall icon">
+  <rect width="128" height="128" rx="24" fill="#f2ddbf"/>
+  <path d="M24 64 64 28l40 36v42a6 6 0 0 1-6 6H30a6 6 0 0 1-6-6Z" fill="#8ab6d6" stroke="#3d2d2d" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M48 112V78a8 8 0 0 1 8-8h16a8 8 0 0 1 8 8v34Z" fill="#d98282" stroke="#3d2d2d" stroke-width="5"/>
+  <path d="M64 42 70 55l14 2-10 10 2 14-12-7-12 7 2-14-10-10 14-2Z" fill="#f6d36b" stroke="#3d2d2d" stroke-width="4" stroke-linejoin="round"/>
+</svg>

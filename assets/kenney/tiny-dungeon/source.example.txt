@@ -1,0 +1,6 @@
+Package: Kenney Tiny Dungeon
+Source URL: https://kenney.nl/assets/tiny-dungeon
+License: CC0 1.0 Universal
+Imported by: [your name]
+Import date: [YYYY-MM-DD]
+Notes: Extract from ZIP, copy required PNGs only. Do not commit ZIP files.

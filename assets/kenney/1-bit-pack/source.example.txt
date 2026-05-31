@@ -1,0 +1,6 @@
+Package: Kenney 1-Bit Pack
+Source URL: https://kenney.nl/assets/1-bit-pack
+License: CC0 1.0 Universal
+Imported by: [your name]
+Import date: [YYYY-MM-DD]
+Notes: Extract from ZIP, copy required PNGs only. Do not commit ZIP files.

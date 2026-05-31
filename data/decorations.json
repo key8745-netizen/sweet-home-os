@@ -1,0 +1,47 @@
+[
+  {
+    "id": "welcome_banner",
+    "display_name": "Welcome Banner",
+    "required_total_xp": 0,
+    "scene_position": [180, 90],
+    "color": "#d98282",
+    "shape": "banner",
+    "sprite_path": "res://assets/kenney/1-bit-pack/decor/welcome_banner.png"
+  },
+  {
+    "id": "cozy_rug",
+    "display_name": "Cozy Rug",
+    "required_total_xp": 25,
+    "scene_position": [330, 310],
+    "color": "#8ab6d6",
+    "shape": "rug",
+    "sprite_path": "res://assets/kenney/1-bit-pack/decor/cozy_rug.png"
+  },
+  {
+    "id": "candlestick",
+    "display_name": "Candlestick",
+    "required_total_xp": 45,
+    "scene_position": [520, 150],
+    "color": "#f6d36b",
+    "shape": "candle",
+    "sprite_path": "res://assets/kenney/1-bit-pack/decor/candlestick.png"
+  },
+  {
+    "id": "guild_planter",
+    "display_name": "Guild Planter",
+    "required_total_xp": 70,
+    "scene_position": [112, 330],
+    "color": "#7fc78b",
+    "shape": "plant",
+    "sprite_path": "res://assets/kenney/1-bit-pack/decor/guild_planter.png"
+  },
+  {
+    "id": "star_lantern",
+    "display_name": "Star Lantern",
+    "required_total_xp": 100,
+    "scene_position": [650, 105],
+    "color": "#f3b76d",
+    "shape": "lantern",
+    "sprite_path": "res://assets/kenney/1-bit-pack/decor/star_lantern.png"
+  }
+]
