@@ -40,5 +40,47 @@
     "encouragement": "你幫整個家保持了整潔，真棒！",
     "status": "available",
     "frequency": "weekly"
+  },
+  {
+    "id": "chore_004",
+    "title": "澆花",
+    "description": "用小水壺幫家裡的植物澆水，請先問大人需不需要澆。",
+    "difficulty": "D",
+    "age_min": 5,
+    "estimated_minutes": 10,
+    "completion_criteria": "家長確認植物都澆到水",
+    "reward_exp": 20,
+    "reward_title": "植物照護師",
+    "encouragement": "植物謝謝你的照顧，它們會長得更好！",
+    "status": "available",
+    "frequency": "daily"
+  },
+  {
+    "id": "chore_005",
+    "title": "整理玄關",
+    "description": "把門口的鞋子排整齊、掛好外套，讓走道保持通暢。",
+    "difficulty": "D",
+    "age_min": 6,
+    "estimated_minutes": 8,
+    "completion_criteria": "家長確認玄關鞋子整齊且走道淨空",
+    "reward_exp": 15,
+    "reward_title": "玄關守衛",
+    "encouragement": "整潔的玄關讓全家人回家都開心！",
+    "status": "available",
+    "frequency": "daily"
+  },
+  {
+    "id": "chore_006",
+    "title": "整理書架",
+    "description": "把書本、雜誌放回書架，讓閱讀角落保持整潔。",
+    "difficulty": "D",
+    "age_min": 6,
+    "estimated_minutes": 10,
+    "completion_criteria": "家長確認書架整齊",
+    "reward_exp": 20,
+    "reward_title": "知識守門人",
+    "encouragement": "整齊的書架讓找書變得超輕鬆！",
+    "status": "available",
+    "frequency": "weekly"
   }
 ]

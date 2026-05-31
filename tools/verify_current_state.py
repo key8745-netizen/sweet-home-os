@@ -172,7 +172,7 @@ def verify_data_logic() -> None:
     if min(int(row.get("required_total_xp", 999999)) for row in stages) != 0:
         raise AssertionError("at least one hero stage must be available at 0 XP")
     for quest in quests:
-        if int(quest.get("xp_reward", 0)) <= 0:
+        if int(quest.get("xp_reward", quest.get("reward_exp", 0))) <= 0:
             raise AssertionError(f"quest {quest.get('id')} must grant positive XP")
     for decoration in decorations:
         if "sprite_path" not in decoration or "shape" not in decoration:
