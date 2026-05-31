@@ -1,0 +1,44 @@
+{
+  "stages": [
+    {
+      "id": "newcomer",
+      "label": "新手冒險者",
+      "required_xp": 0,
+      "sprite": null,
+      "fallback_color": "#7986cb",
+      "fallback_size": 24
+    },
+    {
+      "id": "apprentice",
+      "label": "見習家務師",
+      "required_xp": 100,
+      "sprite": null,
+      "fallback_color": "#4db6ac",
+      "fallback_size": 28
+    },
+    {
+      "id": "journeyman",
+      "label": "家務旅行者",
+      "required_xp": 350,
+      "sprite": null,
+      "fallback_color": "#81c784",
+      "fallback_size": 32
+    },
+    {
+      "id": "expert",
+      "label": "家務專家",
+      "required_xp": 800,
+      "sprite": null,
+      "fallback_color": "#ffb74d",
+      "fallback_size": 36
+    },
+    {
+      "id": "guardian",
+      "label": "家庭守護者",
+      "required_xp": 1500,
+      "sprite": null,
+      "fallback_color": "#f06292",
+      "fallback_size": 40
+    }
+  ]
+}

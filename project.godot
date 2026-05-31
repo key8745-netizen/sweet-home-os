@@ -16,6 +16,10 @@ run/main_scene="res://scenes/guild_hall.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://assets/textures/icon.svg"
 
+[autoload]
+
+SoundManager="*res://scripts/sound_manager.gd"
+
 [display]
 
 window/size/viewport_width=1280

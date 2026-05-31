@@ -1,0 +1,44 @@
+{
+  "decorations": [
+    {
+      "id": "potted_plant",
+      "name": "盆栽",
+      "narration": "公會角落多了一株小植物，空氣感覺清新了一點。",
+      "required_total_xp": 30,
+      "position": {"x": 80, "y": 200},
+      "color": "#4caf50"
+    },
+    {
+      "id": "welcome_rug",
+      "name": "歡迎地墊",
+      "narration": "門口鋪上了溫暖的地墊，歡迎每一位冒險者。",
+      "required_total_xp": 80,
+      "position": {"x": 200, "y": 320},
+      "color": "#a05030"
+    },
+    {
+      "id": "wall_lantern",
+      "name": "壁燈",
+      "narration": "牆上掛起了一盞小燈籠，讓公會暖意融融。",
+      "required_total_xp": 150,
+      "position": {"x": 400, "y": 120},
+      "color": "#f0c040"
+    },
+    {
+      "id": "bookshelf",
+      "name": "小書架",
+      "narration": "書架上擺滿了家人共讀的故事書。",
+      "required_total_xp": 300,
+      "position": {"x": 520, "y": 180},
+      "color": "#8b6914"
+    },
+    {
+      "id": "guild_banner",
+      "name": "公會旗幟",
+      "narration": "屬於你們家的旗幟高高飄揚！",
+      "required_total_xp": 600,
+      "position": {"x": 300, "y": 60},
+      "color": "#9c27b0"
+    }
+  ]
+}
