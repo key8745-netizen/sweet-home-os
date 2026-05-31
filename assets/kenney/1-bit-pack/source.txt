@@ -1,0 +1,6 @@
+Package: Kenney 1-Bit Pack
+Source URL: https://kenney.nl/assets/1-bit-pack
+License: CC0 1.0 Universal
+Imported by: project setup
+Import date: 2024-01-01
+Notes: Sprite staging only — actual PNGs not yet committed. See source.example.txt.

@@ -4,7 +4,7 @@ class_name DecorPlaceholder
 @export var display_name := "Decoration"
 @export var sprite_path := ""
 @export var fallback_color := Color("#f6d36b")
-@export_enum("banner", "rug", "candle", "plant", "lantern", "circle") var fallback_shape: String = "circle"
+@export_enum("banner", "rug", "candle", "plant", "lantern", "shelf", "circle") var fallback_shape: String = "circle"
 
 var _sprite := Sprite2D.new()
 
@@ -44,6 +44,8 @@ func _draw() -> void:
 			_draw_plant()
 		"lantern":
 			_draw_lantern()
+		"shelf":
+			_draw_shelf()
 		_:
 			_draw_circle_badge()
 	var font := ThemeDB.get_fallback_font()
@@ -80,3 +82,9 @@ func _draw_lantern() -> void:
 func _draw_circle_badge() -> void:
 	draw_circle(Vector2.ZERO, 18.0, fallback_color)
 	draw_rect(Rect2(Vector2(-18, 6), Vector2(36, 8)), fallback_color.darkened(0.2), true)
+
+func _draw_shelf() -> void:
+	draw_rect(Rect2(Vector2(-36, -8), Vector2(72, 6)), fallback_color, true)
+	draw_rect(Rect2(Vector2(-36, 8), Vector2(72, 6)), fallback_color, true)
+	draw_rect(Rect2(Vector2(-36, -8), Vector2(6, 22)), fallback_color.darkened(0.2), true)
+	draw_rect(Rect2(Vector2(30, -8), Vector2(6, 22)), fallback_color.darkened(0.2), true)

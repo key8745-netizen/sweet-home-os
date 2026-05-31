@@ -30,6 +30,10 @@ The canonical branch is **work**. Do not reset it to a smaller Phase 1-only skel
 | `docs/design-plan.md` | Product pillars and Phase 2 candidates |
 | `docs/interaction-system.md` | Walk-up interaction design |
 
+## Runtime Features
+
+- Guild hall floor uses a procedural `TileMapLayer` (`GridWorld`) with XP-reactive color tweening.
+
 ## Hero Evolution
 
 A sprite-first hero avatar scaffold is available in `scripts/hero_actor.gd`, `scenes/hero_actor.tscn`, and `data/hero_evolution.json`. It currently falls back to geometric breathing visuals until approved sprite sheets are imported.
