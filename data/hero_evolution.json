@@ -1,23 +1,23 @@
 [
   {
-    "id": "apprentice",
-    "display_name": "Apprentice Adventurer",
-    "required_total_xp": 0,
-    "sprite_path": "res://assets/hero/stage1.png",
-    "body_color": "#8cce7e"
+    "stage": 1,
+    "name": "見習冒險者",
+    "min_xp": 0,
+    "max_xp": 999,
+    "sprite": "assets/hero/stage1.png"
   },
   {
-    "id": "journeyman",
-    "display_name": "Journeyman Adventurer",
-    "required_total_xp": 50,
-    "sprite_path": "res://assets/hero/stage2.png",
-    "body_color": "#6ab0e8"
+    "stage": 2,
+    "name": "中級冒險者",
+    "min_xp": 1000,
+    "max_xp": 4999,
+    "sprite": "assets/hero/stage2.png"
   },
   {
-    "id": "legend",
-    "display_name": "Legendary Adventurer",
-    "required_total_xp": 120,
-    "sprite_path": "res://assets/hero/stage3.png",
-    "body_color": "#e8c06a"
+    "stage": 3,
+    "name": "傳說冒險者",
+    "min_xp": 5000,
+    "max_xp": 99999,
+    "sprite": "assets/hero/stage3.png"
   }
 ]

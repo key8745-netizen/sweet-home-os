@@ -1,97 +1,85 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1guild_hall"]
+[gd_scene load_steps=4 format=3 uid="uid://guild_hall"]
 
-[ext_resource type="Script" path="res://scripts/guild_hall.gd" id="1_ghscript"]
-[ext_resource type="PackedScene" path="res://scenes/hero_actor.tscn" id="2_heroactor"]
-[ext_resource type="Script" path="res://scripts/quest_board_object.gd" id="3_qbscript"]
+[ext_resource type="Script" path="res://scripts/guild_hall.gd" id="1_hall"]
+[ext_resource type="Script" path="res://scripts/quest_board.gd" id="2_board"]
+[ext_resource type="Script" path="res://scripts/dialog_box.gd" id="3_dialog"]
 
 [node name="GuildHall" type="Node2D"]
-script = ExtResource("1_ghscript")
+script = ExtResource("1_hall")
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 1280.0
-offset_bottom = 720.0
-color = Color(0.949, 0.867, 0.749, 1)
+color = Color(0.11, 0.09, 0.16, 1)
 
-[node name="Boundaries" type="Node2D" parent="."]
-
-[node name="Decorations" type="Node2D" parent="."]
-
-[node name="QuestBoardObject" type="Area2D" parent="."]
-position = Vector2(640, 360)
-script = ExtResource("3_qbscript")
-
-[node name="QuestBoardShape" type="CollisionShape2D" parent="QuestBoardObject"]
-
-[node name="QuestList" type="VBoxContainer" parent="."]
+[node name="TitleLabel" type="Label" parent="."]
 offset_left = 20.0
-offset_top = 60.0
+offset_top = 16.0
 offset_right = 400.0
-offset_bottom = 700.0
+offset_bottom = 48.0
+text = "家庭公會大廳"
+theme_override_font_sizes/font_size = 28
 
-[node name="DetailPanel" type="Panel" parent="."]
-visible = false
-offset_left = 440.0
-offset_top = 60.0
+[node name="QuestBoard" type="Control" parent="."]
+offset_left = 32.0
+offset_top = 64.0
+offset_right = 640.0
+offset_bottom = 600.0
+script = ExtResource("2_board")
+
+[node name="QuestBoardLabel" type="Label" parent="QuestBoard"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 400.0
+offset_bottom = 32.0
+text = "任務告示板"
+theme_override_font_sizes/font_size = 20
+
+[node name="QuestList" type="VBoxContainer" parent="QuestBoard"]
+offset_left = 0.0
+offset_top = 40.0
+offset_right = 600.0
+offset_bottom = 540.0
+
+[node name="PartyStatus" type="Control" parent="."]
+offset_left = 660.0
+offset_top = 64.0
 offset_right = 1260.0
-offset_bottom = 700.0
+offset_bottom = 400.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="DetailPanel"]
+[node name="PartyLabel" type="Label" parent="PartyStatus"]
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 300.0
+offset_bottom = 32.0
+text = "公會成員"
+theme_override_font_sizes/font_size = 20
+
+[node name="MemberList" type="VBoxContainer" parent="PartyStatus"]
+offset_left = 0.0
+offset_top = 40.0
+offset_right = 600.0
+offset_bottom = 340.0
+
+[node name="DialogBox" type="Control" parent="."]
+visible = false
+offset_left = 32.0
+offset_top = 620.0
+offset_right = 1248.0
+offset_bottom = 710.0
+script = ExtResource("3_dialog")
+
+[node name="DialogPanel" type="PanelContainer" parent="DialogBox"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = 16.0
-offset_right = -16.0
-offset_bottom = -16.0
 
-[node name="QuestTitle" type="Label" parent="DetailPanel/VBoxContainer"]
-text = "Quest Title"
-theme_override_font_sizes/font_size = 22
-
-[node name="QuestDesc" type="Label" parent="DetailPanel/VBoxContainer"]
-text = "Quest description goes here."
-autowrap_mode = 3
-
-[node name="XPReward" type="Label" parent="DetailPanel/VBoxContainer"]
-text = "獎勵 XP：0"
-
-[node name="AcceptButton" type="Button" parent="DetailPanel/VBoxContainer"]
-text = "接受任務"
-
-[node name="CompleteButton" type="Button" parent="DetailPanel/VBoxContainer"]
-visible = false
-text = "完成任務 ✓"
-
-[node name="XPLabel" type="Label" parent="."]
-offset_left = 20.0
-offset_top = 10.0
-offset_right = 400.0
-offset_bottom = 50.0
-text = "XP: 0"
-theme_override_font_sizes/font_size = 20
-
-[node name="UnlockPanel" type="PanelContainer" parent="."]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -160.0
-offset_top = -60.0
-offset_right = 160.0
-offset_bottom = 60.0
-
-[node name="UnlockLabel" type="Label" parent="UnlockPanel"]
-horizontal_alignment = 1
-text = "New guild comfort unlocked!"
-
-[node name="UnlockTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
-[node name="HeroActor" type="Node2D" parent="." instance=ExtResource("2_heroactor")]
-position = Vector2(640, 500)
+[node name="DialogText" type="RichTextLabel" parent="DialogBox/DialogPanel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+bbcode_enabled = true
+text = ""
+theme_override_font_sizes/normal_font_size = 18
+scroll_active = false

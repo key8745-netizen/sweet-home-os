@@ -1,21 +1,8 @@
-# Python
-__pycache__/
-*.py[cod]
-*.pyo
-
 # Godot
 .godot/
 *.import
 export_presets.cfg
 
-# Archives
-*.zip
-
 # OS
 .DS_Store
 Thumbs.db
-
-# Save data
-user://
-*.tres
-*.res

@@ -1,6 +1,5 @@
 ## SoundManager — Autoload singleton for all SFX
 ## Attach as autoload in project.godot (already configured).
-## Real SFX can be loaded as AudioStreamWAV when assets are imported.
 extends Node
 
 # AudioStreamPlayer pool for fire-and-forget SFX

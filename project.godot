@@ -15,11 +15,7 @@ config/description="A JRPG-style family chore management system"
 config/version="0.1.0"
 run/main_scene="res://scenes/guild_hall.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://assets/icon.svg"
-
-[autoload]
-
-SoundManager="*res://scripts/sound_manager.gd"
+config/icon="res://assets/textures/icon.svg"
 
 [display]
 
