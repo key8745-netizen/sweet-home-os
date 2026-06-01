@@ -1,23 +1,29 @@
 [
   {
+    "id": "apprentice",
     "stage": 1,
     "name": "見習冒險者",
     "min_xp": 0,
-    "max_xp": 999,
-    "sprite": "assets/hero/stage1.png"
+    "max_xp": 49,
+    "sprite": "assets/hero/stage1.png",
+    "required_total_xp": 0
   },
   {
+    "id": "runner",
     "stage": 2,
-    "name": "中級冒險者",
-    "min_xp": 1000,
-    "max_xp": 4999,
-    "sprite": "assets/hero/stage2.png"
+    "name": "公會跑腿",
+    "min_xp": 50,
+    "max_xp": 119,
+    "sprite": "assets/hero/stage2.png",
+    "required_total_xp": 50
   },
   {
+    "id": "champion",
     "stage": 3,
-    "name": "傳說冒險者",
-    "min_xp": 5000,
+    "name": "家庭勇士",
+    "min_xp": 120,
     "max_xp": 99999,
-    "sprite": "assets/hero/stage3.png"
+    "sprite": "assets/hero/stage3.png",
+    "required_total_xp": 120
   }
 ]

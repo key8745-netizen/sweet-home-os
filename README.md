@@ -30,13 +30,22 @@ The canonical branch is **work**. Do not reset it to a smaller Phase 1-only skel
 | `docs/design-plan.md` | Product pillars and Phase 2 candidates |
 | `docs/interaction-system.md` | Walk-up interaction design |
 
+## Runtime Features
+
+- Load Chinese JRPG-style quest cards from `data/quests.json`.
+- Accept a quest, pass a lightweight parent PIN confirmation gate, and then earn local XP from each card's `xp_reward`.
+- Unlock decorations from `data/decorations.json` when `total_xp` reaches their thresholds.
+- Queue decoration unlock overlays so only one family-safe celebration appears at a time.
+- Play a procedural 8-bit unlock arpeggio through the `SoundManager` autoload.
+- Guild hall floor uses a procedural `TileMapLayer` (`GridWorld`) with XP-reactive color tweening.
+
 ## Hero Evolution
 
 A sprite-first hero avatar scaffold is available in `scripts/hero_actor.gd`, `scenes/hero_actor.tscn`, and `data/hero_evolution.json`. It currently falls back to geometric breathing visuals until approved sprite sheets are imported.
 
 ## Growth Feedback
 
-See `docs/growth-feedback.md` for queued unlock overlays, background tween rules, and family-safe tone guardrails. The broader product pillars and Phase 2 candidates live in `docs/design-plan.md`.
+See `docs/design-plan.md` for queued unlock overlays, background tween rules, and family-safe tone guardrails.
 
 ## New Session Handoff
 

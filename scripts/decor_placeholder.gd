@@ -4,7 +4,7 @@ class_name DecorPlaceholder
 @export var display_name := "Decoration"  # populated from JSON "name" field
 @export var sprite_path := ""
 @export var fallback_color := Color("#f6d36b")
-@export_enum("banner", "rug", "candle", "plant", "lantern", "circle") var fallback_shape: String = "circle"
+@export_enum("banner", "rug", "candle", "plant", "shelf", "lantern", "circle") var fallback_shape: String = "circle"
 
 var _sprite := Sprite2D.new()
 
@@ -42,6 +42,8 @@ func _draw() -> void:
 			_draw_candle()
 		"plant":
 			_draw_plant()
+		"shelf":
+			_draw_shelf()
 		"lantern":
 			_draw_lantern()
 		_:
@@ -71,6 +73,12 @@ func _draw_plant() -> void:
 	draw_circle(Vector2(9, -10), 15.0, fallback_color.lightened(0.1))
 	draw_line(Vector2(0, 12), Vector2(0, -20), fallback_color.darkened(0.45), 3.0)
 
+func _draw_shelf() -> void:
+	draw_rect(Rect2(Vector2(-28, -18), Vector2(56, 36)), fallback_color.darkened(0.18), true)
+	draw_rect(Rect2(Vector2(-28, -18), Vector2(56, 36)), fallback_color.darkened(0.38), false, 2.0)
+	draw_line(Vector2(-24, -2), Vector2(24, -2), fallback_color.darkened(0.45), 2.0)
+	draw_rect(Rect2(Vector2(-20, -14), Vector2(8, 10)), Color("#f6d36b"), true)
+
 func _draw_lantern() -> void:
 	draw_line(Vector2(0, -30), Vector2(0, -18), fallback_color.darkened(0.4), 2.0)
 	draw_circle(Vector2(0, 0), 20.0, fallback_color)
@@ -80,3 +88,8 @@ func _draw_lantern() -> void:
 func _draw_circle_badge() -> void:
 	draw_circle(Vector2.ZERO, 18.0, fallback_color)
 	draw_rect(Rect2(Vector2(-18, 6), Vector2(36, 8)), fallback_color.darkened(0.2), true)
+
+func play_unlock_pop() -> void:
+	var tween := create_tween()
+	tween.tween_property(self, "scale", Vector2(1.4, 1.4), 0.12)
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.18)

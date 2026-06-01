@@ -1,5 +1,10 @@
 # Godot
 .godot/
+*.zip
+
+# Python
+__pycache__/
+*.pyc
 *.import
 export_presets.cfg
 

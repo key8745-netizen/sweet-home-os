@@ -1,5 +1,7 @@
 ## SoundManager — Autoload singleton for all SFX
 ## Attach as autoload in project.godot (already configured).
+## When a real WAV asset is available, use AudioStreamWAV.load_from_buffer() or
+## preload("res://assets/sfx/unlock.wav") and pass it to play().
 extends Node
 
 # AudioStreamPlayer pool for fire-and-forget SFX

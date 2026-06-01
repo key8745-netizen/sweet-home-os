@@ -105,9 +105,10 @@ def check_kenney_dir_structure() -> list[str]:
         # Not staged yet — that is OK in Phase 1.
         return issues
 
+    ALLOWED_LOOSE = {"README.md", "README.txt", "import_presets.md"}
     for entry in os.listdir(KENNEY_ASSETS_DIR):
         full = os.path.join(KENNEY_ASSETS_DIR, entry)
-        if os.path.isfile(full):
+        if os.path.isfile(full) and entry not in ALLOWED_LOOSE:
             issues.append(
                 f"Loose file in assets/kenney/ (should be in a pack subdirectory): {entry}"
             )

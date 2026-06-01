@@ -1,64 +1,60 @@
 # Current State — Sweet Home OS
 
-**Date:** 2026-05-31  
-**Branch:** `claude/pensive-tesla-5xCFu`  
-**Phase:** 1 (scaffold complete)
+**Date:** 2026-06-01
+**Branch:** `claude/adoring-bell-dv270`
+**Phase:** 1 (scaffold complete, synced to work canonical baseline)
 
 ---
 
-## What Exists
+## Authoritative Summary
 
-### Project Configuration
-- `project.godot` — Godot 4.3, 1280×720, SoundManager autoload configured
+Use this document when a new session appears to see conflicting summaries from older branches. This is the ground truth.
 
-### Scenes
-- `scenes/guild_hall.tscn` — main scene with Background, QuestList, DetailPanel, XPLabel,
-  UnlockOverlay, HeroActor
-- `scenes/hero_actor.tscn` — character actor with Sprite2D and StageLabel
+## Implemented Runtime Features
 
-### Scripts
-- `scripts/guild_hall.gd` — full core loop: quest loading, XP, decoration unlock queue,
-  background gradient, save/load
-- `scripts/hero_actor.gd` — evolution scaffold: stage lookup, sprite tint fallback
-- `scripts/decor_placeholder.gd` — decoration renderer: sprite_path priority, geometry fallback
-- `scripts/sound_manager.gd` — autoload SFX: programmatic beep placeholders
+- Six Chinese JRPG-style quest cards load from `data/quests.json` and use `xp_reward` as the canonical reward field.
+- The guild hall UI supports selecting, accepting, and reporting completion for quests.
+- Reporting completion opens `ParentGateOverlay`, and XP is granted only after the parent PIN gate emits `verified`.
+- Six decorations load from `data/decorations.json` and unlock by `unlock_xp`, including first-wave Kenney target paths for `guild_planter` and `wooden_shelf`.
+- Newly unlocked decorations are queued so only one overlay appears at a time.
+- `SoundManager` plays a procedural 8-bit arpeggio for decoration unlocks.
+- `World/FloorTileMapLayer` provides a 16x16 procedural TileMapLayer grid, and its floor color tweens across XP bands.
+- `HeroActor` walks with arrow keys/WASD, faces direction, and interacts with `QuestBoardObject` via Space/Enter.
+- Hero evolution scaffold selects the highest stage whose `min_xp` ≤ current XP.
 
-### Data
-- `data/quests.json` — 6 household chore quests (zh-TW titles)
-- `data/decorations.json` — 5 decorations (unlock at 0/500/1500/3500/8000 XP)
-- `data/hero_evolution.json` — 3 evolution stages (0/1000/5000 XP min)
+## Do Not Regress
 
-### Assets
-- `assets/textures/icon.svg` — placeholder SVG icon (guild shield with house)
+- `World/FloorTileMapLayer` must exist and support `floor_color` tween.
+- `World/YSortLayer` must exist with `y_sort_enabled = true`.
+- `HeroActor` must walk and interact with `QuestBoardObject`.
+- Decoration unlock queue must remain (one overlay at a time).
+- `SoundManager.play_unlock_decor_sound()` must be callable.
+- `ParentGateOverlay` must gate XP grant behind PIN verification.
+- `data/quests.json` uses `xp_reward` as canonical reward field.
+- `data/decorations.json` uses `unlock_xp` as canonical threshold field.
 
-### Tooling
-- `tools/validate_asset_ledger.py` — validates research/asset-license-ledger.md and asset staging
-- `tools/verify_current_state.py` — verifies repo file structure and JSON validity
+## Data Schemas (canonical)
 
-### Documentation
-- `docs/software-3-team-plan.md` — design doc, phase tickets, division of labor
-- `docs/phase-1-brief.md` — phase 1 loop, data contract, guardrails, acceptance criteria
-- `docs/current-state.md` — this file
+### quests.json fields
+`id`, `title`, `description`, `xp_reward`, `category`, `estimated_minutes`, `family_note`
 
-### Research
-- `research/asset-license-ledger.md` — Kenney CC0 asset license records
+### decorations.json fields
+`id`, `name`, `description`, `unlock_xp`, `scene_position`, `color`, `shape`, `sprite_path`
 
----
+### hero_evolution.json fields
+`id`, `stage`, `name`, `min_xp`, `max_xp`, `sprite`, `required_total_xp`
 
 ## What Is NOT Yet Done (Phase 2+)
 
-- PIN verification for parent confirmation (P2-001)
+- ~~PIN verification for parent confirmation (P2-001)~~ ✅ 已完成
 - Real Kenney audio SFX assets (P2-002)
-- Animated hero sprite sheets — `assets/hero/stage1-3.png` are referenced but not present (P2-003)
-- Actual Kenney decoration sprites — `assets/kenney/` directory referenced but not staged (P2-002)
-- Particle effects on unlock (P2-004)
-- Multiple hero profiles (P3-001)
-
----
+- Animated hero sprite sheets (P2-003)
+- Actual Kenney decoration sprites (P2-002)
+- Local save/load persistence (P2-004)
+- Particle effects on unlock (P2-005)
 
 ## Known Limitations
 
-- `HeroActor` sprite loads gracefully fail (no texture = just tint change) until real assets land.
-- `DecorPlaceholder` falls back to coloured geometry rectangles for all 5 decorations since
-  Kenney assets are not yet staged.
+- `HeroActor` sprite loads gracefully fail (no texture = just geometric fallback) until real assets land.
+- `DecorPlaceholder` falls back to coloured geometry for all 6 decorations since Kenney assets are not yet staged.
 - SFX are programmatic sine-wave beeps; no audio files referenced.
