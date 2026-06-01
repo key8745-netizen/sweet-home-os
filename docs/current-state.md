@@ -32,6 +32,7 @@ Use this document when a new session appears to see conflicting summaries from o
 - `ParentGateOverlay` must gate XP grant behind PIN verification.
 - `data/quests.json` uses `xp_reward` as canonical reward field.
 - `data/decorations.json` uses `unlock_xp` as canonical threshold field.
+- Save file at `user://sweet_home_save.json` must persist `total_xp`, `accepted_quest`, `shown_decoration_ids`.
 
 ## Data Schemas (canonical)
 
@@ -50,7 +51,7 @@ Use this document when a new session appears to see conflicting summaries from o
 - Real Kenney audio SFX assets (P2-002)
 - Animated hero sprite sheets (P2-003)
 - Actual Kenney decoration sprites (P2-002)
-- Local save/load persistence (P2-004)
+- ~~Local save/load persistence (P2-004)~~ ✅ 已完成
 - Particle effects on unlock (P2-005)
 
 ## Known Limitations

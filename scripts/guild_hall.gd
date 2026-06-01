@@ -3,6 +3,7 @@ extends Node2D
 const QUESTS_PATH := "res://data/quests.json"
 const DECORATIONS_PATH := "res://data/decorations.json"
 const DECORATION_GROUP := "guild_hall_decoration"
+const SAVE_PATH := "user://sweet_home_save.json"
 
 var quests: Array = []
 var decorations: Array = []
@@ -34,11 +35,15 @@ func _ready() -> void:
 	unlock_panel.visible = false
 	quests = _load_json_array(QUESTS_PATH)
 	decorations = _load_json_array(DECORATIONS_PATH)
+	_load_game()
 	_populate_quest_list()
 	refresh_decorations(false)
 	_update_xp_label()
 	_update_background()
 	hero_actor.setup_evolution(total_xp)
+	if not accepted_quest.is_empty():
+		quest_title.text = "Accepted: %s" % accepted_quest.get("title", "Quest")
+		complete_button.disabled = false
 	accept_button.pressed.connect(_on_accept_pressed)
 	complete_button.pressed.connect(_on_complete_pressed)
 	unlock_timer.timeout.connect(_on_unlock_timer_timeout)
@@ -55,6 +60,7 @@ func _on_accept_pressed() -> void:
 	accepted_quest = selected_quest.duplicate(true)
 	quest_title.text = "Accepted: %s" % accepted_quest.get("title", "Quest")
 	complete_button.disabled = false
+	_save_game()
 
 func _on_complete_pressed() -> void:
 	if accepted_quest.is_empty():
@@ -73,6 +79,7 @@ func _on_parent_gate_verified() -> void:
 	_update_background()
 	hero_actor.setup_evolution(total_xp)
 	refresh_decorations(true)
+	_save_game()
 
 func _on_parent_gate_cancelled() -> void:
 	complete_button.disabled = accepted_quest.is_empty()
@@ -159,6 +166,31 @@ func _decoration_unlock_xp(decoration: Dictionary) -> int:
 
 func _quest_reward(quest: Dictionary) -> int:
 	return int(quest.get("xp_reward", quest.get("reward_exp", 0)))
+
+func _save_game() -> void:
+	var data := {
+		"total_xp": total_xp,
+		"accepted_quest": accepted_quest,
+		"shown_decoration_ids": shown_decoration_ids,
+	}
+	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(data))
+
+func _load_game() -> void:
+	if not FileAccess.file_exists(SAVE_PATH):
+		return
+	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if not file:
+		return
+	var parsed = JSON.parse_string(file.get_as_text())
+	if not parsed is Dictionary:
+		return
+	total_xp = int(parsed.get("total_xp", 0))
+	var aq = parsed.get("accepted_quest", {})
+	accepted_quest = aq if aq is Dictionary else {}
+	var ids = parsed.get("shown_decoration_ids", [])
+	shown_decoration_ids.assign(ids if ids is Array else [])
 
 func _load_json_array(path: String) -> Array:
 	if not FileAccess.file_exists(path):
