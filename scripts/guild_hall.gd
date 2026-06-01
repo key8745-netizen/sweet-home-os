@@ -27,6 +27,7 @@ var background_tween: Tween
 @onready var decoration_root: Node2D = $World/YSortLayer
 @onready var hero_actor: HeroActor = $World/YSortLayer/HeroActor
 @onready var quest_board_object: QuestBoardObject = $World/YSortLayer/QuestBoardObject
+@onready var parent_gate: ParentGateOverlay = $ParentGateOverlay
 
 func _ready() -> void:
 	quest_panel.visible = false
@@ -42,6 +43,8 @@ func _ready() -> void:
 	complete_button.pressed.connect(_on_complete_pressed)
 	unlock_timer.timeout.connect(_on_unlock_timer_timeout)
 	quest_board_object.interacted.connect(_on_quest_board_interacted)
+	parent_gate.verified.connect(_on_parent_gate_verified)
+	parent_gate.cancelled.connect(_on_parent_gate_cancelled)
 
 func _on_quest_board_interacted() -> void:
 	quest_panel.visible = true
@@ -56,6 +59,12 @@ func _on_accept_pressed() -> void:
 func _on_complete_pressed() -> void:
 	if accepted_quest.is_empty():
 		return
+	complete_button.disabled = true
+	var title := str(accepted_quest.get("title", "Quest"))
+	var reward := _quest_reward(accepted_quest)
+	parent_gate.show_gate(title, reward)
+
+func _on_parent_gate_verified() -> void:
 	total_xp += _quest_reward(accepted_quest)
 	accepted_quest.clear()
 	complete_button.disabled = true
@@ -63,6 +72,9 @@ func _on_complete_pressed() -> void:
 	_update_background()
 	hero_actor.setup_evolution(total_xp)
 	refresh_decorations(true)
+
+func _on_parent_gate_cancelled() -> void:
+	complete_button.disabled = false
 
 func refresh_decorations(show_unlock_feedback := true) -> void:
 	for child in decoration_root.get_children():

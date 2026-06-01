@@ -33,7 +33,7 @@ The canonical branch is **work**. Do not reset it to a smaller Phase 1-only skel
 ## Runtime Features
 
 - Load Chinese JRPG-style quest cards from `data/quests.json`.
-- Accept a quest and report completion to earn local XP from each card's `xp_reward`.
+- Accept a quest, pass a lightweight parent PIN confirmation gate, and then earn local XP from each card's `xp_reward`.
 - Unlock decorations from `data/decorations.json` when `total_xp` reaches their thresholds.
 - Queue decoration unlock overlays so only one family-safe celebration appears at a time.
 - Play a procedural 8-bit unlock arpeggio through the `SoundManager` autoload.

@@ -14,7 +14,7 @@ Use this document when a new session appears to see conflicting summaries from o
 
 - Six Chinese JRPG-style quest cards load from `data/quests.json` and use `xp_reward` as the canonical reward field.
 - The guild hall UI supports selecting, accepting, and reporting completion for quests.
-- Completing a quest increments local `total_xp` in `scripts/guild_hall.gd`.
+- Reporting completion opens `ParentGateOverlay`, and XP is granted only after the parent PIN gate emits `verified`.
 - Six decorations load from `data/decorations.json` and unlock by `unlock_xp`, including first-wave Kenney target paths for `guild_planter` and `wooden_shelf`.
 - Newly unlocked decorations are queued so only one overlay appears at a time.
 - `SoundManager` plays a procedural 8-bit arpeggio for decoration unlocks.
@@ -29,6 +29,7 @@ Use this document when a new session appears to see conflicting summaries from o
 - `HeroActor` must walk and interact with `QuestBoardObject`.
 - Decoration unlock queue must remain (one overlay at a time).
 - `SoundManager.play_unlock_decor_sound()` must be callable.
+- `ParentGateOverlay` must gate XP grant behind PIN verification.
 - `data/quests.json` uses `xp_reward` as canonical reward field.
 - `data/decorations.json` uses `unlock_xp` as canonical threshold field.
 
@@ -45,7 +46,7 @@ Use this document when a new session appears to see conflicting summaries from o
 
 ## What Is NOT Yet Done (Phase 2+)
 
-- PIN verification for parent confirmation (P2-001)
+- ~~PIN verification for parent confirmation (P2-001)~~ ✅ 已完成
 - Real Kenney audio SFX assets (P2-002)
 - Animated hero sprite sheets (P2-003)
 - Actual Kenney decoration sprites (P2-002)
