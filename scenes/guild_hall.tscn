@@ -96,6 +96,21 @@ offset_bottom = 42.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
 text = "Guild XP: 0"
 
+[node name="HeroStatusLabel" type="Label" parent="CanvasLayer/Hud"]
+offset_left = 16.0
+offset_top = 38.0
+offset_right = 400.0
+offset_bottom = 66.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
+text = "Hero: Sprout Helper | Next: 50 XP"
+
+[node name="HelpButton" type="Button" parent="CanvasLayer/Hud"]
+offset_left = 642.0
+offset_top = 12.0
+offset_right = 784.0
+offset_bottom = 42.0
+text = "Family Help"
+
 [node name="QuestPanel" type="PanelContainer" parent="CanvasLayer"]
 offset_left = 32.0
 offset_top = 56.0
@@ -155,5 +170,36 @@ theme_override_constants/margin_bottom = 12
 layout_mode = 2
 autowrap_mode = 3
 text = "New guild comfort unlocked!"
+
+[node name="HelpPanel" type="PanelContainer" parent="CanvasLayer"]
+visible = false
+offset_left = 410.0
+offset_top = 132.0
+offset_right = 770.0
+offset_bottom = 366.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HelpPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 14
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HelpPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="HelpTitle" type="Label" parent="CanvasLayer/HelpPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Family Help"
+
+[node name="HelpBody" type="Label" parent="CanvasLayer/HelpPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+autowrap_mode = 3
+text = "Choose quests together. A grown-up enters the family PIN before XP is granted. A new calendar day clears only the accepted quest; XP and unlocked decorations stay safe. Keep sessions short, warm, and comparison-free."
+
+[node name="CloseHelpButton" type="Button" parent="CanvasLayer/HelpPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Close"
 
 [node name="ParentGateOverlay" parent="." instance=ExtResource("5_gate")]

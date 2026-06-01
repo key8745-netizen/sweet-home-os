@@ -51,7 +51,9 @@ Use this document when a new session appears to see conflicting summaries from o
 - Real Kenney audio SFX assets (P2-002)
 - Animated hero sprite sheets (P2-003)
 - Actual Kenney decoration sprites (P2-002)
-- ~~Local save/load persistence (P2-004)~~ ✅ 已完成
+- ~~Local save/load persistence with daily accepted-quest reset (P2-004)~~ ✅ 已完成
+- ~~Hero Status HUD showing current stage and next XP target (P2-003 partial)~~ ✅ 已完成
+- ~~Family Help panel explaining PIN, daily reset, and non-punitive tone~~ ✅ 已完成
 - Particle effects on unlock (P2-005)
 
 ## Known Limitations
