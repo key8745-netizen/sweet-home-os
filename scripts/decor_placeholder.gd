@@ -1,7 +1,7 @@
 extends Node2D
 class_name DecorPlaceholder
 
-@export var display_name := "Decoration"
+@export var display_name := "Decoration"  # populated from JSON "name" field
 @export var sprite_path := ""
 @export var fallback_color := Color("#f6d36b")
 @export_enum("banner", "rug", "candle", "plant", "lantern", "circle") var fallback_shape: String = "circle"
@@ -13,7 +13,7 @@ func _ready() -> void:
 	_load_sprite_or_fallback()
 
 func setup(decoration: Dictionary) -> void:
-	display_name = str(decoration.get("display_name", display_name))
+	display_name = str(decoration.get("name", decoration.get("display_name", display_name)))
 	sprite_path = str(decoration.get("sprite_path", sprite_path))
 	fallback_color = Color(str(decoration.get("color", "#f6d36b")))
 	fallback_shape = str(decoration.get("shape", fallback_shape))

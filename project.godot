@@ -47,6 +47,10 @@ ui_cancel={
 
 locale/fallback="zh_TW"
 
+[autoload]
+
+SoundManager="*res://scripts/sound_manager.gd"
+
 [layer_names]
 
 2d_physics/layer_1="world"
