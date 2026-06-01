@@ -27,7 +27,7 @@ var background_tween: Tween
 @onready var decoration_root: Node2D = $World/YSortLayer
 @onready var hero_actor: HeroActor = $World/YSortLayer/HeroActor
 @onready var quest_board_object: QuestBoardObject = $World/YSortLayer/QuestBoardObject
-@onready var parent_gate: ParentGateOverlay = $ParentGateOverlay
+@onready var parent_gate_overlay: ParentGateOverlay = $ParentGateOverlay
 
 func _ready() -> void:
 	quest_panel.visible = false
@@ -43,8 +43,8 @@ func _ready() -> void:
 	complete_button.pressed.connect(_on_complete_pressed)
 	unlock_timer.timeout.connect(_on_unlock_timer_timeout)
 	quest_board_object.interacted.connect(_on_quest_board_interacted)
-	parent_gate.verified.connect(_on_parent_gate_verified)
-	parent_gate.cancelled.connect(_on_parent_gate_cancelled)
+	parent_gate_overlay.verified.connect(_on_parent_gate_verified)
+	parent_gate_overlay.cancelled.connect(_on_parent_gate_cancelled)
 
 func _on_quest_board_interacted() -> void:
 	quest_panel.visible = true
@@ -60,11 +60,12 @@ func _on_complete_pressed() -> void:
 	if accepted_quest.is_empty():
 		return
 	complete_button.disabled = true
-	var title := str(accepted_quest.get("title", "Quest"))
-	var reward := _quest_reward(accepted_quest)
-	parent_gate.show_gate(title, reward)
+	parent_gate_overlay.show_gate(str(accepted_quest.get("title", "Quest")), _quest_reward(accepted_quest))
 
 func _on_parent_gate_verified() -> void:
+	if accepted_quest.is_empty():
+		complete_button.disabled = true
+		return
 	total_xp += _quest_reward(accepted_quest)
 	accepted_quest.clear()
 	complete_button.disabled = true
@@ -74,7 +75,7 @@ func _on_parent_gate_verified() -> void:
 	refresh_decorations(true)
 
 func _on_parent_gate_cancelled() -> void:
-	complete_button.disabled = false
+	complete_button.disabled = accepted_quest.is_empty()
 
 func refresh_decorations(show_unlock_feedback := true) -> void:
 	for child in decoration_root.get_children():
@@ -83,10 +84,11 @@ func refresh_decorations(show_unlock_feedback := true) -> void:
 	for decoration in decorations:
 		if total_xp < _decoration_unlock_xp(decoration):
 			continue
-		_spawn_decoration(decoration)
+		var decoration_node := _spawn_decoration(decoration)
 		var id := str(decoration.get("id", ""))
 		if show_unlock_feedback and not shown_decoration_ids.has(id):
 			_queue_decoration_unlock(decoration)
+			decoration_node.play_unlock_pop()
 		if not shown_decoration_ids.has(id):
 			shown_decoration_ids.append(id)
 
@@ -126,13 +128,14 @@ func _select_quest(quest: Dictionary) -> void:
 	quest_description.text = str(quest.get("description", "Choose a kind household quest."))
 	accept_button.disabled = false
 
-func _spawn_decoration(decoration: Dictionary) -> void:
+func _spawn_decoration(decoration: Dictionary) -> DecorPlaceholder:
 	var node := DecorPlaceholder.new()
 	node.add_to_group(DECORATION_GROUP)
 	decoration_root.add_child(node)
 	node.setup(decoration)
 	var scene_position: Array = decoration.get("scene_position", [0, 0])
 	node.position = Vector2(float(scene_position[0]), float(scene_position[1]))
+	return node
 
 func _update_xp_label() -> void:
 	xp_label.text = "Guild XP: %s" % total_xp
