@@ -37,6 +37,7 @@ REQUIRED_FILES = [
     "docs/current-state.md",
     "docs/research/asset-license-ledger.md",
     "tools/validate_asset_ledger.py",
+    "tools/verify_first_wave_pngs.py",
     ".gitignore",
     "assets/kenney/1-bit-pack/source.example.txt",
     "assets/kenney/tiny-dungeon/source.example.txt",
@@ -61,6 +62,9 @@ REQUIRED_MARKERS = {
         "DECORATION_GROUP",
         "SoundManager.play_unlock_decor_sound()",
         "DecorPlaceholder.new()",
+        "decoration_node.play_unlock_pop()",
+        "func _on_parent_gate_verified() -> void:",
+        "parent_gate_overlay.show_gate",
     ],
     "scripts/hero_actor.gd": [
         "func setup_evolution(p_total_xp: int) -> void:",
@@ -191,6 +195,12 @@ REQUIRED_MARKERS = {
         "Kenney 1-Bit Pack",
         "https://kenney.nl/assets/1-bit-pack",
         "CC0 1.0 Universal",
+    ],
+    "tools/verify_first_wave_pngs.py": [
+        "def validate_png(path: Path) -> list[str]:",
+        "first-wave Kenney PNG checks passed",
+        "guild_planter.png",
+        "wooden_shelf.png",
     ],
     "README.md": [
         "Canonical State",

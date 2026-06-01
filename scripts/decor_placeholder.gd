@@ -88,3 +88,8 @@ func _draw_lantern() -> void:
 func _draw_circle_badge() -> void:
 	draw_circle(Vector2.ZERO, 18.0, fallback_color)
 	draw_rect(Rect2(Vector2(-18, 6), Vector2(36, 8)), fallback_color.darkened(0.2), true)
+
+func play_unlock_pop() -> void:
+	var tween := create_tween()
+	tween.tween_property(self, "scale", Vector2(1.4, 1.4), 0.12)
+	tween.tween_property(self, "scale", Vector2(1.0, 1.0), 0.18)
