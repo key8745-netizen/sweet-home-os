@@ -80,6 +80,10 @@ shape = SubResource("RectangleShape2D_wall_v")
 wait_time = 2.0
 one_shot = true
 
+[node name="AutosaveTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" type="Control" parent="CanvasLayer"]
@@ -95,6 +99,21 @@ offset_right = 220.0
 offset_bottom = 42.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
 text = "Guild XP: 0"
+
+[node name="HeroStatusLabel" type="Label" parent="CanvasLayer/Hud"]
+offset_left = 16.0
+offset_top = 48.0
+offset_right = 380.0
+offset_bottom = 78.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_hud")
+text = ""
+
+[node name="HelpButton" type="Button" parent="CanvasLayer/Hud"]
+offset_left = 720.0
+offset_top = 12.0
+offset_right = 780.0
+offset_bottom = 42.0
+text = "?"
 
 [node name="QuestPanel" type="PanelContainer" parent="CanvasLayer"]
 offset_left = 32.0
@@ -155,5 +174,36 @@ theme_override_constants/margin_bottom = 12
 layout_mode = 2
 autowrap_mode = 3
 text = "New guild comfort unlocked!"
+
+[node name="HelpPanel" type="PanelContainer" parent="CanvasLayer"]
+offset_left = 160.0
+offset_top = 80.0
+offset_right = 620.0
+offset_bottom = 400.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+visible = false
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HelpPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HelpPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="HelpTitle" type="Label" parent="CanvasLayer/HelpPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Family Help"
+
+[node name="HelpBody" type="Label" parent="CanvasLayer/HelpPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+autowrap_mode = 3
+text = "A caregiver enters the PIN to confirm a completed quest. Daily accepted quests reset each new day — XP is never lost. No comparisons, no punishments — just warm progress together."
+
+[node name="CloseButton" type="Button" parent="CanvasLayer/HelpPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Close"
 
 [node name="ParentGateOverlay" parent="." instance=ExtResource("5_gate")]
