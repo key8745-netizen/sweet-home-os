@@ -47,6 +47,10 @@ A sprite-first hero avatar scaffold is available in `scripts/hero_actor.gd`, `sc
 
 See `docs/design-plan.md` for queued unlock overlays, background tween rules, and family-safe tone guardrails.
 
+## Validation
+
+Run `python3 tools/godot_smoke_test.py` as the optional Godot headless smoke wrapper. It skips cleanly when no `godot` binary is installed; use `python3 tools/godot_smoke_test.py --require-godot` in CI runners where Godot is expected.
+
 ## New Session Handoff
 
 Use `docs/new-session-brief.md` as the copy/paste opening prompt for a fresh agent session.

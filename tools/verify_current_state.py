@@ -38,6 +38,7 @@ REQUIRED_FILES = [
     "docs/research/asset-license-ledger.md",
     "tools/validate_asset_ledger.py",
     "tools/verify_first_wave_pngs.py",
+    "tools/godot_smoke_test.py",
     ".gitignore",
     "assets/kenney/1-bit-pack/source.example.txt",
     "assets/kenney/tiny-dungeon/source.example.txt",
@@ -201,6 +202,11 @@ REQUIRED_MARKERS = {
         "first-wave Kenney PNG checks passed",
         "guild_planter.png",
         "wooden_shelf.png",
+    ],
+    "tools/godot_smoke_test.py": [
+        "--require-godot",
+        "godot binary not found; skipping optional headless smoke test",
+        "--headless",
     ],
     "README.md": [
         "Canonical State",

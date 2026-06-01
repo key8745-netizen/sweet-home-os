@@ -27,5 +27,6 @@ Before ending a session:
 - [ ] All new/modified files committed
 - [ ] `python3 tools/verify_current_state.py` passes
 - [ ] `python3 tools/validate_asset_ledger.py` passes
+- [ ] `python3 tools/godot_smoke_test.py` (skips cleanly if Godot unavailable; use `--require-godot` in CI)
 - [ ] `docs/current-state.md` updated if scope changed
 - [ ] Branch pushed to remote

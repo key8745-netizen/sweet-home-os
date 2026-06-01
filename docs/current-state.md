@@ -54,6 +54,7 @@ Use this document when a new session appears to see conflicting summaries from o
 - ~~Local save/load persistence with daily accepted-quest reset (P2-004)~~ ✅ 已完成
 - ~~Hero Status HUD showing current stage and next XP target (P2-003 partial)~~ ✅ 已完成
 - ~~Family Help panel explaining PIN, daily reset, and non-punitive tone~~ ✅ 已完成
+- ~~Optional Godot headless smoke test wrapper (`tools/godot_smoke_test.py`)~~ ✅ 已完成
 - Particle effects on unlock (P2-005)
 
 ## Known Limitations
