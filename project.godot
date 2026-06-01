@@ -74,6 +74,7 @@ locale/fallback="zh_TW"
 [autoload]
 
 SoundManager="*res://scripts/sound_manager.gd"
+SaveManager="*res://scripts/save_manager.gd"
 
 [layer_names]
 
