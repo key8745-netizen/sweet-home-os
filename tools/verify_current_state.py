@@ -24,7 +24,9 @@ REQUIRED_FILES = [
     "data/quests.json",
     "scenes/guild_hall.tscn",
     "scenes/hero_actor.tscn",
+    "scenes/parent_gate_overlay.tscn",
     "scripts/decor_placeholder.gd",
+    "scripts/parent_gate_overlay.gd",
     "scripts/grid_world.gd",
     "scripts/guild_hall.gd",
     "scripts/hero_actor.gd",
@@ -35,12 +37,14 @@ REQUIRED_FILES = [
     "docs/current-state.md",
     "docs/research/asset-license-ledger.md",
     "tools/validate_asset_ledger.py",
+    "tools/verify_first_wave_pngs.py",
     ".gitignore",
     "assets/kenney/1-bit-pack/source.example.txt",
     "assets/kenney/tiny-dungeon/source.example.txt",
     "docs/phase-4.1-first-import-brief.md",
     "docs/phase-4.4-grid-world.md",
     "docs/new-session-brief.md",
+    "docs/open-new-conversation.md",
 ]
 
 REQUIRED_MARKERS = {
@@ -58,6 +62,9 @@ REQUIRED_MARKERS = {
         "DECORATION_GROUP",
         "SoundManager.play_unlock_decor_sound()",
         "DecorPlaceholder.new()",
+        "decoration_node.play_unlock_pop()",
+        "func _on_parent_gate_verified() -> void:",
+        "parent_gate_overlay.show_gate",
     ],
     "scripts/hero_actor.gd": [
         "func setup_evolution(p_total_xp: int) -> void:",
@@ -104,6 +111,21 @@ REQUIRED_MARKERS = {
         "InteractPrompt",
         "FallbackBody",
     ],
+    "scenes/parent_gate_overlay.tscn": [
+        "ParentGateOverlay",
+        "QuestContextLabel",
+        "PinInput",
+        "ConfirmButton",
+        "CancelButton",
+    ],
+    "scripts/parent_gate_overlay.gd": [
+        "class_name ParentGateOverlay",
+        "signal verified",
+        "signal cancelled",
+        'func show_gate(quest_title: String = "Quest", xp_reward: int = 0) -> void:',
+        "@export var parent_pin",
+        "func _show_error_feedback() -> void:",
+    ],
     "scripts/quest_board_object.gd": [
         "signal interacted",
         "func interact(_hero: Node = null) -> void:",
@@ -143,6 +165,12 @@ REQUIRED_MARKERS = {
         "python3 tools/verify_current_state.py",
         "Short Chinese Opening Prompt",
     ],
+    "docs/open-new-conversation.md": [
+        "Sweet Home OS 新對話接手提示",
+        "Phase 2：家長確認 gate",
+        "World/FloorTileMapLayer",
+        "python3 tools/verify_current_state.py",
+    ],
     "project.godot": [
         'renderer/rendering_method="gl_compatibility"',
         "ui_left",
@@ -167,6 +195,12 @@ REQUIRED_MARKERS = {
         "Kenney 1-Bit Pack",
         "https://kenney.nl/assets/1-bit-pack",
         "CC0 1.0 Universal",
+    ],
+    "tools/verify_first_wave_pngs.py": [
+        "def validate_png(path: Path) -> list[str]:",
+        "first-wave Kenney PNG checks passed",
+        "guild_planter.png",
+        "wooden_shelf.png",
     ],
     "README.md": [
         "Canonical State",
@@ -225,19 +259,23 @@ def verify_data_logic() -> None:
     require_unique_ids("data/quests.json", quests)
     require_unique_ids("data/decorations.json", decorations)
     require_unique_ids("data/hero_evolution.json", stages)
-    if min(int(row.get("required_total_xp", 999999)) for row in decorations) != 0:
+    if min(int(row.get("unlock_xp", row.get("required_total_xp", 999999))) for row in decorations) != 0:
         raise AssertionError("at least one decoration must be available at 0 XP")
     if min(int(row.get("required_total_xp", 999999)) for row in stages) != 0:
         raise AssertionError("at least one hero stage must be available at 0 XP")
     for quest in quests:
-        reward = int(quest.get("reward_exp", quest.get("xp_reward", 0)))
+        reward = int(quest.get("xp_reward", quest.get("reward_exp", 0)))
         if reward <= 0:
             raise AssertionError(f"quest {quest.get('id')} must grant positive EXP/XP")
-        if "reward_exp" not in quest:
-            raise AssertionError(f"quest {quest.get('id')} must use reward_exp as the canonical field")
+        if "xp_reward" not in quest:
+            raise AssertionError(f"quest {quest.get('id')} must use xp_reward as the canonical field")
+        if "category" not in quest:
+            raise AssertionError(f"quest {quest.get('id')} must include a category")
     for decoration in decorations:
-        if "sprite_path" not in decoration or "shape" not in decoration:
-            raise AssertionError(f"decoration {decoration.get('id')} needs sprite_path and fallback shape")
+        required_fields = ["name", "unlock_xp", "description", "sprite_path", "shape"]
+        missing = [f for f in required_fields if f not in decoration]
+        if missing:
+            raise AssertionError(f"decoration {decoration.get('id')} missing fields: {missing}")
         sprite_path = str(decoration.get("sprite_path", ""))
         if sprite_path and not sprite_path.startswith("res://assets/kenney/"):
             raise AssertionError(f"decoration {decoration.get('id')} has non-project Kenney sprite_path: {sprite_path}")

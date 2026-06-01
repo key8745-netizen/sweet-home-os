@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://guildhall"]
+[gd_scene load_steps=10 format=3 uid="uid://guildhall"]
 
 [ext_resource type="Script" path="res://scripts/guild_hall.gd" id="1_guild"]
 [ext_resource type="PackedScene" path="res://scenes/hero_actor.tscn" id="2_hero"]
 [ext_resource type="Script" path="res://scripts/quest_board_object.gd" id="3_board"]
 [ext_resource type="Script" path="res://scripts/grid_world.gd" id="4_grid"]
+[ext_resource type="PackedScene" path="res://scenes/parent_gate_overlay.tscn" id="5_gate"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_board"]
 size = Vector2(84, 60)
@@ -154,3 +155,5 @@ theme_override_constants/margin_bottom = 12
 layout_mode = 2
 autowrap_mode = 3
 text = "New guild comfort unlocked!"
+
+[node name="ParentGateOverlay" parent="." instance=ExtResource("5_gate")]

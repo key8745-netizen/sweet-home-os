@@ -1,8 +1,9 @@
 [
   {
     "id": "welcome_banner",
-    "display_name": "Welcome Banner",
-    "required_total_xp": 0,
+    "name": "Welcome Banner",
+    "description": "公會大廳一開始就掛上的歡迎旗幟，提醒家人這裡是合作的地方。",
+    "unlock_xp": 0,
     "scene_position": [180, 90],
     "color": "#d98282",
     "shape": "banner",
@@ -10,8 +11,9 @@
   },
   {
     "id": "cozy_rug",
-    "display_name": "Cozy Rug",
-    "required_total_xp": 10,
+    "name": "Cozy Rug",
+    "description": "柔軟地毯讓任務板前的等待時間更溫馨。",
+    "unlock_xp": 25,
     "scene_position": [330, 310],
     "color": "#8ab6d6",
     "shape": "rug",
@@ -19,8 +21,9 @@
   },
   {
     "id": "candlestick",
-    "display_name": "Candlestick",
-    "required_total_xp": 25,
+    "name": "Candlestick",
+    "description": "小小燭台為完成任務後的慶祝時刻添上一點光。",
+    "unlock_xp": 45,
     "scene_position": [520, 150],
     "color": "#f6d36b",
     "shape": "candle",
@@ -28,29 +31,32 @@
   },
   {
     "id": "guild_planter",
-    "display_name": "Guild Planter",
-    "required_total_xp": 45,
+    "name": "Guild Planter",
+    "description": "一盆綠意植物，象徵家務練習帶來的穩定成長。",
+    "unlock_xp": 70,
     "scene_position": [112, 330],
     "color": "#7fc78b",
     "shape": "plant",
     "sprite_path": "res://assets/kenney/1-bit-pack/decor/guild_planter.png"
   },
   {
+    "id": "wooden_shelf",
+    "name": "Wooden Shelf",
+    "description": "木質書架讓公會大廳更像安心的閱讀角落。",
+    "unlock_xp": 85,
+    "scene_position": [430, 155],
+    "color": "#b8845a",
+    "shape": "shelf",
+    "sprite_path": "res://assets/kenney/1-bit-pack/decor/wooden_shelf.png"
+  },
+  {
     "id": "star_lantern",
-    "display_name": "Star Lantern",
-    "required_total_xp": 70,
+    "name": "Star Lantern",
+    "description": "星光燈籠在高 XP 時點亮，慶祝家人一起累積的努力。",
+    "unlock_xp": 100,
     "scene_position": [650, 105],
     "color": "#f3b76d",
     "shape": "lantern",
     "sprite_path": "res://assets/kenney/1-bit-pack/decor/star_lantern.png"
-  },
-  {
-    "id": "wooden_shelf",
-    "display_name": "Wooden Shelf",
-    "required_total_xp": 100,
-    "scene_position": [400, 80],
-    "color": "#c8a96e",
-    "shape": "shelf",
-    "sprite_path": "res://assets/kenney/1-bit-pack/decor/wooden_shelf.png"
   }
 ]

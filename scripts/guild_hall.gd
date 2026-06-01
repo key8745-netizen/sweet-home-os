@@ -3,6 +3,7 @@ extends Node2D
 const QUESTS_PATH := "res://data/quests.json"
 const DECORATIONS_PATH := "res://data/decorations.json"
 const DECORATION_GROUP := "guild_hall_decoration"
+const SAVE_PATH := "user://sweet_home_save.json"
 
 var quests: Array = []
 var decorations: Array = []
@@ -27,21 +28,28 @@ var background_tween: Tween
 @onready var decoration_root: Node2D = $World/YSortLayer
 @onready var hero_actor: HeroActor = $World/YSortLayer/HeroActor
 @onready var quest_board_object: QuestBoardObject = $World/YSortLayer/QuestBoardObject
+@onready var parent_gate_overlay: ParentGateOverlay = $ParentGateOverlay
 
 func _ready() -> void:
 	quest_panel.visible = false
 	unlock_panel.visible = false
 	quests = _load_json_array(QUESTS_PATH)
 	decorations = _load_json_array(DECORATIONS_PATH)
+	_load_game()
 	_populate_quest_list()
 	refresh_decorations(false)
 	_update_xp_label()
 	_update_background()
 	hero_actor.setup_evolution(total_xp)
+	if not accepted_quest.is_empty():
+		quest_title.text = "Accepted: %s" % accepted_quest.get("title", "Quest")
+		complete_button.disabled = false
 	accept_button.pressed.connect(_on_accept_pressed)
 	complete_button.pressed.connect(_on_complete_pressed)
 	unlock_timer.timeout.connect(_on_unlock_timer_timeout)
 	quest_board_object.interacted.connect(_on_quest_board_interacted)
+	parent_gate_overlay.verified.connect(_on_parent_gate_verified)
+	parent_gate_overlay.cancelled.connect(_on_parent_gate_cancelled)
 
 func _on_quest_board_interacted() -> void:
 	quest_panel.visible = true
@@ -52,9 +60,17 @@ func _on_accept_pressed() -> void:
 	accepted_quest = selected_quest.duplicate(true)
 	quest_title.text = "Accepted: %s" % accepted_quest.get("title", "Quest")
 	complete_button.disabled = false
+	_save_game()
 
 func _on_complete_pressed() -> void:
 	if accepted_quest.is_empty():
+		return
+	complete_button.disabled = true
+	parent_gate_overlay.show_gate(str(accepted_quest.get("title", "Quest")), _quest_reward(accepted_quest))
+
+func _on_parent_gate_verified() -> void:
+	if accepted_quest.is_empty():
+		complete_button.disabled = true
 		return
 	total_xp += _quest_reward(accepted_quest)
 	accepted_quest.clear()
@@ -63,18 +79,23 @@ func _on_complete_pressed() -> void:
 	_update_background()
 	hero_actor.setup_evolution(total_xp)
 	refresh_decorations(true)
+	_save_game()
+
+func _on_parent_gate_cancelled() -> void:
+	complete_button.disabled = accepted_quest.is_empty()
 
 func refresh_decorations(show_unlock_feedback := true) -> void:
 	for child in decoration_root.get_children():
 		if child.is_in_group(DECORATION_GROUP):
 			child.queue_free()
 	for decoration in decorations:
-		if total_xp < int(decoration.get("required_total_xp", 0)):
+		if total_xp < _decoration_unlock_xp(decoration):
 			continue
-		_spawn_decoration(decoration)
+		var decoration_node := _spawn_decoration(decoration)
 		var id := str(decoration.get("id", ""))
 		if show_unlock_feedback and not shown_decoration_ids.has(id):
 			_queue_decoration_unlock(decoration)
+			decoration_node.play_unlock_pop()
 		if not shown_decoration_ids.has(id):
 			shown_decoration_ids.append(id)
 
@@ -88,7 +109,7 @@ func _show_next_unlock() -> void:
 		unlock_panel.visible = false
 		return
 	var decoration := queued_unlocks.pop_front()
-	unlock_label.text = "New guild comfort unlocked: %s" % decoration.get("display_name", "Decoration")
+	unlock_label.text = "New guild comfort unlocked: %s" % _decoration_name(decoration)
 	unlock_panel.visible = true
 	if has_node("/root/SoundManager"):
 		SoundManager.play_unlock_decor_sound()
@@ -114,13 +135,14 @@ func _select_quest(quest: Dictionary) -> void:
 	quest_description.text = str(quest.get("description", "Choose a kind household quest."))
 	accept_button.disabled = false
 
-func _spawn_decoration(decoration: Dictionary) -> void:
+func _spawn_decoration(decoration: Dictionary) -> DecorPlaceholder:
 	var node := DecorPlaceholder.new()
 	node.add_to_group(DECORATION_GROUP)
 	decoration_root.add_child(node)
 	node.setup(decoration)
 	var scene_position: Array = decoration.get("scene_position", [0, 0])
 	node.position = Vector2(float(scene_position[0]), float(scene_position[1]))
+	return node
 
 func _update_xp_label() -> void:
 	xp_label.text = "Guild XP: %s" % total_xp
@@ -136,8 +158,39 @@ func _update_background() -> void:
 	background_tween = create_tween()
 	background_tween.tween_property(background, "floor_color", target, 0.4)
 
+func _decoration_name(decoration: Dictionary) -> String:
+	return str(decoration.get("name", decoration.get("display_name", "Decoration")))
+
+func _decoration_unlock_xp(decoration: Dictionary) -> int:
+	return int(decoration.get("unlock_xp", decoration.get("required_total_xp", 0)))
+
 func _quest_reward(quest: Dictionary) -> int:
-	return int(quest.get("reward_exp", quest.get("xp_reward", 0)))
+	return int(quest.get("xp_reward", quest.get("reward_exp", 0)))
+
+func _save_game() -> void:
+	var data := {
+		"total_xp": total_xp,
+		"accepted_quest": accepted_quest,
+		"shown_decoration_ids": shown_decoration_ids,
+	}
+	var file := FileAccess.open(SAVE_PATH, FileAccess.WRITE)
+	if file:
+		file.store_string(JSON.stringify(data))
+
+func _load_game() -> void:
+	if not FileAccess.file_exists(SAVE_PATH):
+		return
+	var file := FileAccess.open(SAVE_PATH, FileAccess.READ)
+	if not file:
+		return
+	var parsed = JSON.parse_string(file.get_as_text())
+	if not parsed is Dictionary:
+		return
+	total_xp = int(parsed.get("total_xp", 0))
+	var aq = parsed.get("accepted_quest", {})
+	accepted_quest = aq if aq is Dictionary else {}
+	var ids = parsed.get("shown_decoration_ids", [])
+	shown_decoration_ids.assign(ids if ids is Array else [])
 
 func _load_json_array(path: String) -> Array:
 	if not FileAccess.file_exists(path):

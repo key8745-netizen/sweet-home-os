@@ -3,48 +3,54 @@
     "id": "tidy_table",
     "title": "清理宴會長桌",
     "description": "把餐後的桌面恢復成適合下一場家庭聚會的樣子。",
-    "reward_exp": 10,
     "estimated_minutes": 5,
-    "family_note": "大人可以協助確認碗盤與抹布要放回哪裡。"
+    "family_note": "大人可以協助確認碗盤與抹布要放回哪裡。",
+    "xp_reward": 10,
+    "category": "dining"
   },
   {
     "id": "laundry_squire",
     "title": "洗衣侍從分類術",
     "description": "整理乾淨襪子，或摺好一小疊衣物。",
-    "reward_exp": 15,
     "estimated_minutes": 10,
-    "family_note": "任務範圍保持小一點，讓孩子能穩定完成。"
+    "family_note": "任務範圍保持小一點，讓孩子能穩定完成。",
+    "xp_reward": 15,
+    "category": "laundry"
   },
   {
     "id": "pet_helper",
     "title": "溫柔獸友照看",
     "description": "在大人附近協助確認寵物水碗或食碗。",
-    "reward_exp": 20,
     "estimated_minutes": 5,
-    "family_note": "所有寵物照護規則以現實安全為優先。"
+    "family_note": "所有寵物照護規則以現實安全為優先。",
+    "xp_reward": 20,
+    "category": "pet_care"
   },
   {
     "id": "book_nook_reset",
     "title": "書角賢者整理",
     "description": "把書、漫畫或雜誌送回溫暖的閱讀角落。",
-    "reward_exp": 10,
     "estimated_minutes": 5,
-    "family_note": "可以讓孩子挑一本最喜歡的書展示出來。"
+    "family_note": "可以讓孩子挑一本最喜歡的書展示出來。",
+    "xp_reward": 10,
+    "category": "reading"
   },
   {
     "id": "entryway_ranger",
     "title": "玄關巡守隊",
     "description": "排好鞋子、掛好外套，或清出門口的一條安全道路。",
-    "reward_exp": 15,
     "estimated_minutes": 8,
-    "family_note": "把重點放在讓下一次全家出門更順利。"
+    "family_note": "把重點放在讓下一次全家出門更順利。",
+    "xp_reward": 15,
+    "category": "entryway"
   },
   {
     "id": "plant_apprentice",
     "title": "綠葉見習生觀察",
     "description": "觀察一盆植物，只有在大人確認需要時才幫它澆水。",
-    "reward_exp": 20,
     "estimated_minutes": 5,
-    "family_note": "這張任務卡練習先觀察、再行動。"
+    "family_note": "這張任務卡練習先觀察、再行動。",
+    "xp_reward": 20,
+    "category": "plants"
   }
 ]
