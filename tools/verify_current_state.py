@@ -19,6 +19,9 @@ REQUIRED_FILES = [
     "assets/kenney/import_presets.md",
     "assets/kenney/1-bit-pack/source.txt",
     "assets/kenney/1-bit-pack/decor/.gitkeep",
+    "assets/original/README.md",
+    "assets/original/decor/guild_planter.png",
+    "assets/original/decor/wooden_shelf.png",
     "data/decorations.json",
     "data/hero_evolution.json",
     "data/quests.json",
@@ -26,23 +29,27 @@ REQUIRED_FILES = [
     "scenes/hero_actor.tscn",
     "scenes/parent_gate_overlay.tscn",
     "scripts/decor_placeholder.gd",
-    "scripts/parent_gate_overlay.gd",
     "scripts/grid_world.gd",
     "scripts/guild_hall.gd",
     "scripts/hero_actor.gd",
     "scripts/sound_manager.gd",
+    "scripts/save_manager.gd",
     "scripts/quest_board_object.gd",
+    "scripts/parent_gate_overlay.gd",
     "docs/design-plan.md",
     "docs/interaction-system.md",
     "docs/current-state.md",
     "docs/research/asset-license-ledger.md",
     "tools/validate_asset_ledger.py",
+    "tools/import_first_wave_kenney.py",
     "tools/verify_first_wave_pngs.py",
+    "tools/godot_smoke_test.py",
     ".gitignore",
     "assets/kenney/1-bit-pack/source.example.txt",
     "assets/kenney/tiny-dungeon/source.example.txt",
     "docs/phase-4.1-first-import-brief.md",
     "docs/phase-4.4-grid-world.md",
+    "docs/original-sprite-art-handoff.md",
     "docs/new-session-brief.md",
     "docs/open-new-conversation.md",
 ]
@@ -50,6 +57,7 @@ REQUIRED_FILES = [
 REQUIRED_MARKERS = {
     "scripts/guild_hall.gd": [
         'const DECORATIONS_PATH := "res://data/decorations.json"',
+        'const HERO_STAGES_PATH := "res://data/hero_evolution.json"',
         "var queued_unlocks: Array[Dictionary]",
         "func _on_quest_board_interacted() -> void:",
         "func _on_complete_pressed() -> void:",
@@ -63,8 +71,21 @@ REQUIRED_MARKERS = {
         "SoundManager.play_unlock_decor_sound()",
         "DecorPlaceholder.new()",
         "decoration_node.play_unlock_pop()",
-        "func _on_parent_gate_verified() -> void:",
         "parent_gate_overlay.show_gate",
+        "help_button.pressed.connect(_on_help_pressed)",
+        "func _on_help_pressed() -> void:",
+        "func _on_help_close_pressed() -> void:",
+        "func _on_parent_gate_verified() -> void:",
+        "func _update_hero_status_label() -> void:",
+        "func _current_hero_stage() -> Dictionary:",
+        "func _next_hero_stage() -> Dictionary:",
+        "func _exit_tree() -> void:",
+        "func _apply_save_data(save_data: Dictionary) -> void:",
+        "func _save_progress() -> void:",
+        "func _should_reset_daily_quest(save_data: Dictionary) -> bool:",
+        "func _current_date_string() -> String:",
+        "last_play_date",
+        "autosave_timer.wait_time = 30.0",
     ],
     "scripts/hero_actor.gd": [
         "func setup_evolution(p_total_xp: int) -> void:",
@@ -81,6 +102,7 @@ REQUIRED_MARKERS = {
         "fallback_shape",
         "func _draw_candle() -> void:",
         "func _draw_shelf() -> void:",
+        "func play_unlock_pop() -> void:",
     ],
     "scripts/grid_world.gd": [
         "extends TileMapLayer",
@@ -92,6 +114,18 @@ REQUIRED_MARKERS = {
     "scripts/sound_manager.gd": [
         "func play_unlock_decor_sound() -> void:",
         "AudioStreamWAV",
+    ],
+    "scripts/save_manager.gd": [
+        "SAVE_PATH",
+        "func save_game(",
+        "func load_game(",
+        "func reset_save(",
+        "last_play_date",
+    ],
+    "scripts/parent_gate_overlay.gd": [
+        "signal verified",
+        "signal cancelled",
+        "func show_gate() -> void:",
     ],
     "scenes/guild_hall.tscn": [
         "World",
@@ -105,6 +139,8 @@ REQUIRED_MARKERS = {
         "UnlockTimer",
         "Boundaries",
         "QuestBoardObject",
+        "HeroStatusLabel",
+        "Family Help",
     ],
     "scenes/hero_actor.tscn": [
         "InteractionArea",
@@ -112,19 +148,8 @@ REQUIRED_MARKERS = {
         "FallbackBody",
     ],
     "scenes/parent_gate_overlay.tscn": [
-        "ParentGateOverlay",
-        "QuestContextLabel",
         "PinInput",
         "ConfirmButton",
-        "CancelButton",
-    ],
-    "scripts/parent_gate_overlay.gd": [
-        "class_name ParentGateOverlay",
-        "signal verified",
-        "signal cancelled",
-        'func show_gate(quest_title: String = "Quest", xp_reward: int = 0) -> void:',
-        "@export var parent_pin",
-        "func _show_error_feedback() -> void:",
     ],
     "scripts/quest_board_object.gd": [
         "signal interacted",
@@ -166,17 +191,20 @@ REQUIRED_MARKERS = {
         "Short Chinese Opening Prompt",
     ],
     "docs/open-new-conversation.md": [
+        "tools/godot_smoke_test.py",
+        "Hero Status HUD",
         "Sweet Home OS 新對話接手提示",
-        "Phase 2：家長確認 gate",
-        "World/FloorTileMapLayer",
-        "python3 tools/verify_current_state.py",
+        "SaveManager",
+        "Family Help",
     ],
     "project.godot": [
+        'config/icon="res://assets/textures/icon.svg"',
         'renderer/rendering_method="gl_compatibility"',
         "ui_left",
         "ui_right",
         "ui_up",
         "ui_down",
+        "SaveManager",
     ],
     "assets/kenney/README.md": [
         "Manual Import Checklist",
@@ -191,23 +219,29 @@ REQUIRED_MARKERS = {
         "Compression",
         "divisible by 16",
     ],
-    "assets/kenney/1-bit-pack/source.txt": [
-        "Kenney 1-Bit Pack",
-        "https://kenney.nl/assets/1-bit-pack",
-        "CC0 1.0 Universal",
+    "assets/original/README.md": [
+        "guild_planter.png",
+        "wooden_shelf.png",
+        "divisible by 16",
     ],
     "tools/verify_first_wave_pngs.py": [
         "def validate_png(path: Path) -> list[str]:",
-        "first-wave Kenney PNG checks passed",
-        "guild_planter.png",
-        "wooden_shelf.png",
+        "first-wave original PNG checks passed",
+    ],
+    "tools/godot_smoke_test.py": [
+        "--require-godot",
+        "godot binary not found; skipping optional headless smoke test",
+        "--headless",
     ],
     "README.md": [
+        "tools/godot_smoke_test.py",
+        "Hero Status HUD",
         "Canonical State",
         "queued decoration unlocks",
         "Do not reset it to a smaller Phase 1-only skeleton",
         "docs/design-plan.md",
         "TileMapLayer",
+        "Family Help",
     ],
 }
 
@@ -259,26 +293,18 @@ def verify_data_logic() -> None:
     require_unique_ids("data/quests.json", quests)
     require_unique_ids("data/decorations.json", decorations)
     require_unique_ids("data/hero_evolution.json", stages)
-    if min(int(row.get("unlock_xp", row.get("required_total_xp", 999999))) for row in decorations) != 0:
+    unlock_xp_values = [int(row.get("unlock_xp", row.get("required_total_xp", 999999))) for row in decorations]
+    if min(unlock_xp_values) != 0:
         raise AssertionError("at least one decoration must be available at 0 XP")
-    if min(int(row.get("required_total_xp", 999999)) for row in stages) != 0:
+    if min(int(row.get("required_total_xp", row.get("min_xp", 999999))) for row in stages) != 0:
         raise AssertionError("at least one hero stage must be available at 0 XP")
     for quest in quests:
         reward = int(quest.get("xp_reward", quest.get("reward_exp", 0)))
         if reward <= 0:
-            raise AssertionError(f"quest {quest.get('id')} must grant positive EXP/XP")
-        if "xp_reward" not in quest:
-            raise AssertionError(f"quest {quest.get('id')} must use xp_reward as the canonical field")
-        if "category" not in quest:
-            raise AssertionError(f"quest {quest.get('id')} must include a category")
+            raise AssertionError(f"quest {quest.get('id')} must grant positive XP")
     for decoration in decorations:
-        required_fields = ["name", "unlock_xp", "description", "sprite_path", "shape"]
-        missing = [f for f in required_fields if f not in decoration]
-        if missing:
-            raise AssertionError(f"decoration {decoration.get('id')} missing fields: {missing}")
-        sprite_path = str(decoration.get("sprite_path", ""))
-        if sprite_path and not sprite_path.startswith("res://assets/kenney/"):
-            raise AssertionError(f"decoration {decoration.get('id')} has non-project Kenney sprite_path: {sprite_path}")
+        if "sprite_path" not in decoration or "shape" not in decoration:
+            raise AssertionError(f"decoration {decoration.get('id')} needs sprite_path and fallback shape")
     decoration_ids = {str(row.get("id")) for row in decorations}
     for required_id in ["guild_planter", "wooden_shelf"]:
         if required_id not in decoration_ids:

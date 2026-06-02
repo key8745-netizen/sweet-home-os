@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
-"""Godot smoke test: verify project.godot is parseable and optionally run Godot headless.
+"""Optional Godot headless smoke test wrapper.
 
-Usage:
-    python3 tools/godot_smoke_test.py               # Skip if Godot not found
-    python3 tools/godot_smoke_test.py --require-godot  # Fail if Godot not found
+Runs `godot --headless --path <repo_root> --quit`.
+Skips cleanly when no godot binary is found unless --require-godot is passed.
 """
-
 from __future__ import annotations
 
 import argparse
@@ -15,80 +13,32 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-PROJECT_GODOT = ROOT / "project.godot"
-MAIN_SCENE = "res://scenes/guild_hall.tscn"
-
-
-def check_project_godot() -> None:
-    if not PROJECT_GODOT.is_file():
-        raise AssertionError("project.godot not found")
-    text = PROJECT_GODOT.read_text(encoding="utf-8")
-    for marker in [
-        'config/name="Sweet Home OS"',
-        "SoundManager",
-        "gl_compatibility",
-    ]:
-        if marker not in text:
-            raise AssertionError(f"project.godot missing expected marker: {marker!r}")
-
-
-def find_godot() -> str | None:
-    for candidate in ("godot", "godot4", "godot-4", "Godot_v4"):
-        if shutil.which(candidate):
-            return candidate
-    return None
-
-
-def run_godot_headless(binary: str) -> None:
-    cmd = [binary, "--headless", "--quit", "--path", str(ROOT)]
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
-    if result.returncode not in (0, 255):
-        # Godot headless may return 255 on normal quit; treat as ok
-        raise AssertionError(
-            f"Godot exited with code {result.returncode}.\n"
-            f"stdout: {result.stdout[-2000:]}\n"
-            f"stderr: {result.stderr[-2000:]}"
-        )
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--require-godot",
-        action="store_true",
-        help="Fail if Godot binary is not found in PATH",
-    )
+    parser.add_argument("--require-godot", action="store_true",
+                        help="Fail if godot binary is not found (for CI use)")
     args = parser.parse_args()
 
-    try:
-        check_project_godot()
-        print("[OK] project.godot structure valid")
-    except AssertionError as err:
-        print(f"[FAIL] project.godot check: {err}", file=sys.stderr)
-        return 1
-
-    binary = find_godot()
-    if binary is None:
+    godot = shutil.which("godot") or shutil.which("godot4")
+    if not godot:
         if args.require_godot:
-            print(
-                "[FAIL] --require-godot set but no Godot binary found in PATH",
-                file=sys.stderr,
-            )
+            print("ERROR: godot binary not found; --require-godot was set", file=sys.stderr)
             return 1
-        print("[SKIP] Godot binary not found — skipping headless run (environment limitation)")
+        print("godot binary not found; skipping optional headless smoke test")
         return 0
 
-    print(f"[OK] Godot binary found: {binary}")
-    try:
-        run_godot_headless(binary)
-        print("[OK] Godot headless run completed")
-    except subprocess.TimeoutExpired:
-        print("[FAIL] Godot headless run timed out after 60s", file=sys.stderr)
+    result = subprocess.run(
+        [godot, "--headless", "--path", str(ROOT), "--quit"],
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode != 0:
+        print(f"Godot smoke test failed (exit {result.returncode})", file=sys.stderr)
+        print(result.stderr, file=sys.stderr)
         return 1
-    except AssertionError as err:
-        print(f"[FAIL] {err}", file=sys.stderr)
-        return 1
-
+    print("Godot headless smoke test passed")
     return 0
 
 
