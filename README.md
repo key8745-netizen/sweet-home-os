@@ -38,6 +38,10 @@ The canonical branch is **work**. Do not reset it to a smaller Phase 1-only skel
 - Queue decoration unlock overlays so only one family-safe celebration appears at a time.
 - Play a procedural 8-bit unlock arpeggio through the `SoundManager` autoload.
 - Guild hall floor uses a procedural `TileMapLayer` (`GridWorld`) with XP-reactive color tweening.
+- Hero Status HUD shows current hero stage name and XP needed for next evolution.
+- Family Help panel explains the parent PIN flow and daily accepted-quest reset in a non-punitive tone.
+- Progress is auto-saved every 30 seconds via `SaveManager` to `user://save/sweet_home_save.json`.
+- Run `python3 tools/godot_smoke_test.py` to check for a Godot binary and optionally run a headless smoke test.
 
 ## Hero Evolution
 
