@@ -37,7 +37,10 @@
     "scene_position": [112, 330],
     "color": "#7fc78b",
     "shape": "plant",
-    "sprite_path": "res://assets/kenney/1-bit-pack/decor/guild_planter.png"
+    "sprite_path": "res://assets/kenney/1-bit-pack/decor/guild_planter.png",
+    "blocks_movement": true,
+    "collision_size": [28, 32],
+    "collision_offset": [0, 4]
   },
   {
     "id": "wooden_shelf",
@@ -47,7 +50,10 @@
     "scene_position": [430, 155],
     "color": "#b8845a",
     "shape": "shelf",
-    "sprite_path": "res://assets/kenney/1-bit-pack/decor/wooden_shelf.png"
+    "sprite_path": "res://assets/kenney/1-bit-pack/decor/wooden_shelf.png",
+    "blocks_movement": true,
+    "collision_size": [48, 20],
+    "collision_offset": [0, 2]
   },
   {
     "id": "star_lantern",
