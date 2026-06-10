@@ -14,6 +14,7 @@ var total_xp := 0
 var shown_decoration_ids: Array[String] = []
 var queued_unlocks: Array[Dictionary] = []
 var background_tween: Tween
+var audio_save_timer: Timer
 
 @onready var background: Node = $World/FloorTileMapLayer
 @onready var quest_panel: PanelContainer = $CanvasLayer/QuestPanel
@@ -121,7 +122,18 @@ func _on_sfx_toggled(enabled: bool) -> void:
 func _on_sfx_volume_changed(value: float) -> void:
 	if has_node("/root/SoundManager"):
 		SoundManager.set_sfx_volume(value)
-	_save_progress()
+	_request_audio_save()
+
+## Volume slider can fire many value_changed events while dragging;
+## debounce the save instead of writing the file on every step.
+func _request_audio_save() -> void:
+	if audio_save_timer == null:
+		audio_save_timer = Timer.new()
+		audio_save_timer.one_shot = true
+		audio_save_timer.wait_time = 0.4
+		audio_save_timer.timeout.connect(_save_progress)
+		add_child(audio_save_timer)
+	audio_save_timer.start()
 
 func refresh_decorations(show_unlock_feedback := true) -> void:
 	for child in decoration_root.get_children():
