@@ -1,0 +1,3 @@
+[build]
+  command = "echo 'Using pre-built Godot web export in web-build'"
+  publish = "web-build"
