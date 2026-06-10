@@ -31,4 +31,8 @@ func _default_save() -> Dictionary:
 		"accepted_quest": {},
 		"shown_decoration_ids": [],
 		"last_play_date": "",
+		"audio_settings": {
+			"sfx_enabled": true,
+			"sfx_volume": 1.0,
+		},
 	}

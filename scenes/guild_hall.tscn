@@ -202,6 +202,18 @@ layout_mode = 2
 autowrap_mode = 3
 text = "A caregiver enters the PIN to confirm a completed quest. Daily accepted quests reset each new day — XP is never lost. No comparisons, no punishments — just warm progress together."
 
+[node name="SfxToggleButton" type="CheckButton" parent="CanvasLayer/HelpPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Sound Effects"
+
+[node name="SfxVolumeSlider" type="HSlider" parent="CanvasLayer/HelpPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = 0.0
+max_value = 1.0
+step = 0.05
+value = 1.0
+
 [node name="CloseButton" type="Button" parent="CanvasLayer/HelpPanel/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Close"
