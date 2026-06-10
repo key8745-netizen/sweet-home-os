@@ -27,6 +27,8 @@ var background_tween: Tween
 @onready var help_button: Button = $CanvasLayer/Hud/HelpButton
 @onready var help_panel: PanelContainer = $CanvasLayer/HelpPanel
 @onready var help_close_button: Button = $CanvasLayer/HelpPanel/MarginContainer/VBoxContainer/CloseButton
+@onready var sfx_toggle_button: CheckButton = $CanvasLayer/HelpPanel/MarginContainer/VBoxContainer/SfxToggleButton
+@onready var sfx_volume_slider: HSlider = $CanvasLayer/HelpPanel/MarginContainer/VBoxContainer/SfxVolumeSlider
 @onready var unlock_panel: PanelContainer = $CanvasLayer/UnlockPanel
 @onready var unlock_label: Label = $CanvasLayer/UnlockPanel/MarginContainer/UnlockLabel
 @onready var unlock_timer: Timer = $UnlockTimer
@@ -56,6 +58,9 @@ func _ready() -> void:
 	quest_board_object.interacted.connect(_on_quest_board_interacted)
 	help_button.pressed.connect(_on_help_pressed)
 	help_close_button.pressed.connect(_on_help_close_pressed)
+	_setup_audio_controls()
+	sfx_toggle_button.toggled.connect(_on_sfx_toggled)
+	sfx_volume_slider.value_changed.connect(_on_sfx_volume_changed)
 	parent_gate_overlay.verified.connect(_on_parent_gate_verified)
 	parent_gate_overlay.cancelled.connect(_on_parent_gate_cancelled)
 	autosave_timer.wait_time = 30.0
@@ -99,6 +104,24 @@ func _on_help_pressed() -> void:
 
 func _on_help_close_pressed() -> void:
 	help_panel.visible = false
+
+func _setup_audio_controls() -> void:
+	if has_node("/root/SoundManager"):
+		sfx_toggle_button.button_pressed = SoundManager.is_sfx_enabled()
+		sfx_volume_slider.value = SoundManager.get_sfx_volume()
+	else:
+		sfx_toggle_button.button_pressed = true
+		sfx_volume_slider.value = 1.0
+
+func _on_sfx_toggled(enabled: bool) -> void:
+	if has_node("/root/SoundManager"):
+		SoundManager.set_sfx_enabled(enabled)
+	_save_progress()
+
+func _on_sfx_volume_changed(value: float) -> void:
+	if has_node("/root/SoundManager"):
+		SoundManager.set_sfx_volume(value)
+	_save_progress()
 
 func refresh_decorations(show_unlock_feedback := true) -> void:
 	for child in decoration_root.get_children():
@@ -214,13 +237,21 @@ func _apply_save_data(save_data: Dictionary) -> void:
 		shown_decoration_ids.append(str(id))
 	if _should_reset_daily_quest(save_data):
 		accepted_quest.clear()
+	if has_node("/root/SoundManager"):
+		var audio_settings = save_data.get("audio_settings", {})
+		if audio_settings is Dictionary:
+			SoundManager.apply_audio_settings(audio_settings)
 
 func _save_progress() -> void:
+	var audio_settings := {"sfx_enabled": true, "sfx_volume": 1.0}
+	if has_node("/root/SoundManager"):
+		audio_settings = SoundManager.get_audio_settings()
 	SaveManager.save_game({
 		"total_xp": total_xp,
 		"accepted_quest": accepted_quest,
 		"shown_decoration_ids": shown_decoration_ids,
 		"last_play_date": _current_date_string(),
+		"audio_settings": audio_settings,
 	})
 
 func _should_reset_daily_quest(save_data: Dictionary) -> bool:
