@@ -4,16 +4,22 @@ class_name ParentGateOverlay
 signal verified
 signal cancelled
 
-@onready var pin_input: LineEdit = $PanelContainer/VBoxContainer/PinInput
-@onready var confirm_button: Button = $PanelContainer/VBoxContainer/ButtonRow/ConfirmButton
-@onready var cancel_button: Button = $PanelContainer/VBoxContainer/ButtonRow/CancelButton
+@onready var pin_input: LineEdit = $Dimmer/PanelContainer/MarginContainer/VBoxContainer/PinInput
+@onready var confirm_button: Button = $Dimmer/PanelContainer/MarginContainer/VBoxContainer/ButtonRow/ConfirmButton
+@onready var cancel_button: Button = $Dimmer/PanelContainer/MarginContainer/VBoxContainer/ButtonRow/CancelButton
 
 const PARENT_PIN := "1234"
 
 func _ready() -> void:
 	visible = false
-	confirm_button.pressed.connect(_on_confirm_pressed)
-	cancel_button.pressed.connect(_on_cancel_pressed)
+	if confirm_button:
+		confirm_button.pressed.connect(_on_confirm_pressed)
+	else:
+		push_warning("ParentGateOverlay: ConfirmButton not found")
+	if cancel_button:
+		cancel_button.pressed.connect(_on_cancel_pressed)
+	else:
+		push_warning("ParentGateOverlay: CancelButton not found")
 
 func show_gate() -> void:
 	pin_input.text = ""

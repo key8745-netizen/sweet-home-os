@@ -46,7 +46,7 @@ func setup_evolution(p_total_xp: int) -> void:
 	var new_stage := _stage_for_xp(p_total_xp)
 	if new_stage.is_empty():
 		return
-	var stage_changed := _current_stage.get("stage", -1) != new_stage.get("stage", -1)
+	var stage_changed: bool = _current_stage.get("stage", -1) != new_stage.get("stage", -1)
 	_current_stage = new_stage
 	_apply_stage(new_stage)
 	if stage_changed:

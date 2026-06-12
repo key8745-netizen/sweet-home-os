@@ -160,7 +160,7 @@ func _show_next_unlock() -> void:
 	if queued_unlocks.is_empty():
 		unlock_panel.visible = false
 		return
-	var decoration := queued_unlocks.pop_front()
+	var decoration: Dictionary = queued_unlocks.pop_front()
 	unlock_label.text = "New guild comfort unlocked: %s" % decoration.get("display_name", "Decoration")
 	unlock_panel.visible = true
 	if has_node("/root/SoundManager"):
